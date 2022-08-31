@@ -4,15 +4,18 @@
     <router-link to="/about">About</router-link>
   </nav>
   <router-view />
-  <commentApp />
 </template>
 
 <script>
-import commentApp from "@/components/CommentApp.vue"
+import commentApp from "@/components/Comment.vue"
 
 export default {
-  components: {
-    commentApp,
+  data() {
+    return {
+      components: {
+        commentApp,
+      },
+    }
   },
 }
 </script>

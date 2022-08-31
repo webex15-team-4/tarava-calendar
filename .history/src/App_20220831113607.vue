@@ -11,8 +11,12 @@
 import commentApp from "@/components/CommentApp.vue"
 
 export default {
-  components: {
-    commentApp,
+  data() {
+    return {
+      components: {
+        commentApp,
+      },
+    }
   },
 }
 </script>

@@ -4,18 +4,7 @@
     <router-link to="/about">About</router-link>
   </nav>
   <router-view />
-  <commentApp />
 </template>
-
-<script>
-import commentApp from "@/components/CommentApp.vue"
-
-export default {
-  components: {
-    commentApp,
-  },
-}
-</script>
 
 <style>
 #app {

@@ -11,10 +11,10 @@
 import commentApp from "@/components/CommentApp.vue"
 
 export default {
-  components: {
-    commentApp,
+      components: {
+        commentApp,
+      },
   },
-}
 </script>
 
 <style>

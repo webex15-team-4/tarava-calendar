@@ -41,15 +41,14 @@ export default {
         console.log(this.inputComment)
         console.log(this.items)
       }
+      //if (this.inputComment)
     },
     cancel() {
       if (this.inputComment !== "") {
         this.inputComment = ""
-      } else
-        this.inputComment === "",
-          {
-            // this.inputComment = ""
-          }
+      } else (this.inputComment === ""), {
+        this.inputComment = ""
+      }
       this.inputComment = ""
     },
   },

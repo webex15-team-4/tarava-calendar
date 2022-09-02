@@ -1,7 +1,8 @@
 <template>
   <h1>りんご</h1>
   <div class="inputContainer">
-    <textarea
+    <input
+      type="text"
       v-model="inputComment"
       v-on:keydown.enter.exact.prevent
       v-on:keyup.enter.exact="MoveFocus"
@@ -26,14 +27,6 @@ export default {
     }
   },
   methods: {
-    MoveFocus() {
-      // TODO: Enterキー押下時に必要な処理（例：フォーカス移動）を行う。
-    },
-    NewLine() {
-      // 改行処理の例
-      this.textdata = `${this.textdata}\n`
-    },
-
     comment() {
       if (this.inputComment !== "") {
         this.items.push({ text: this.inputComment })
@@ -41,15 +34,14 @@ export default {
         console.log(this.inputComment)
         console.log(this.items)
       }
+      //if (this.inputComment)
     },
     cancel() {
-      if (this.inputComment !== "") {
-        this.inputComment = ""
-      } else
-        this.inputComment === "",
-          {
-            // this.inputComment = ""
-          }
+      // if (this.inputComment !== "") {
+      //   this.inputComment = ""
+      // } else (this.inputComment === "") {
+      //   this.inputComment = ""
+      // }
       this.inputComment = ""
     },
   },

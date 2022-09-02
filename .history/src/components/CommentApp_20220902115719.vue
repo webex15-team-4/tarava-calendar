@@ -1,7 +1,8 @@
 <template>
   <h1>りんご</h1>
   <div class="inputContainer">
-    <textarea
+    <input
+      type="text"
       v-model="inputComment"
       v-on:keydown.enter.exact.prevent
       v-on:keyup.enter.exact="MoveFocus"
@@ -41,15 +42,14 @@ export default {
         console.log(this.inputComment)
         console.log(this.items)
       }
+      //if (this.inputComment)
     },
     cancel() {
-      if (this.inputComment !== "") {
-        this.inputComment = ""
-      } else
-        this.inputComment === "",
-          {
-            // this.inputComment = ""
-          }
+      // if (this.inputComment !== "") {
+      //   this.inputComment = ""
+      // } else (this.inputComment === "") {
+      //   this.inputComment = ""
+      // }
       this.inputComment = ""
     },
   },

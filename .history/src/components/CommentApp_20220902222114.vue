@@ -1,13 +1,12 @@
 <template>
   <h1>りんご</h1>
-  <div class="inputComment">{{ inputComment }}</div>
+  <div class="inputContainer">{{ inputContainer }}</div>
   <div>
     <textarea
       v-model="inputComment"
-      @keydown.enter.exact="keyDownEnter"
-      @keydown.enter.shift.exact="keyDownEnterShift"
-      @keyup.enter.exact="keyUpEnter"
-      class="textarea"
+      v-on:keydown.enter.exact.prevent
+      v-on:keyup.enter.exact="MoveFocus"
+      v-on:keydown.enter.shift.exact="NewLine"
     />
     <button v-on:click="comment">コメント</button>
     <button v-on:click="cancel">キャンセル</button>
@@ -28,17 +27,12 @@ export default {
     }
   },
   methods: {
-    keyDownEnter() {
-      this.inputComment = `${this.inputComment}￥n`
-      console.log("ボタンが押された！")
+    MoveFocus() {
+      // TODO: Enterキー押下時に必要な処理（例：フォーカス移動）を行う。
     },
-
-    keyDownEnterShift() {
-      console.log("shift,enter")
-    },
-
-    keyUpEnter() {
-      console.log("ボタンが離れた！")
+    NewLine() {
+      // 改行処理の例
+      this.textdata = `${this.textdata}\n`
     },
 
     comment() {
@@ -47,8 +41,6 @@ export default {
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)
-      } else {
-        alert("文字を入力してね")
       }
     },
     cancel() {

@@ -4,17 +4,17 @@
     <router-link to="/about">About</router-link>
   </nav>
   <router-view />
-  <CommentApp />
+  <commentApp />
   <ScheduleApp />
 </template>
 
 <script>
-import CommentApp from "./components/CommentApp.vue"
+import commentApp from "@/components/CommentApp.vue"
 import ScheduleApp from "@/components/ScheduleApp.vue"
 
 export default {
   components: {
-    CommentApp,
+    commentApp,
     ScheduleApp,
   },
 }

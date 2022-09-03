@@ -47,8 +47,6 @@ export default {
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)
-      } else {
-        alert("文字を入力してね")
       }
     },
     cancel() {

@@ -1,19 +1,20 @@
 <template>
   <h1>りんご</h1>
-  <div class="inputComment">{{ inputComment }}</div>
+  <!-- show_returnのスタイルを適応 -->
+  <div class="inputComment show_return">{{ inputComment }}</div>
   <div>
     <textarea
       v-model="inputComment"
-      @keydown.enter.exact="keyDownEnter"
       @keydown.enter.shift.exact="keyDownEnterShift"
-      @keyup.enter.exact="keyUpEnter"
       class="textarea"
     />
+    <!-- ↑あえて書いてた\nの明示化を外した -->
     <button v-on:click="comment">コメント</button>
     <button v-on:click="cancel">キャンセル</button>
   </div>
   <ul>
-    <li v-for="(item, index) in items" :key="index">
+    <!-- show_returnのスタイルを適応 -->
+    <li class="show_return" v-for="(item, index) in items" :key="index">
       <span>{{ item.text }}</span>
     </li>
   </ul>
@@ -68,4 +69,10 @@ export default {
 //key: value,のオブジェクト
 </script>
 
-<style></style>
+<style>
+/* これは半角スペースや改行の扱い方を示している */
+.show_return {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+</style>

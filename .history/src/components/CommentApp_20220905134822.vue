@@ -3,7 +3,7 @@
   <!-- <div class="inputComment">{{ inputComment }}</div> -->
   <!-- show_returnのスタイルを適応 -->
   <!-- <div class="inputComment show_return">{{ inputComment }}</div> -->
-
+  <p>
   <div v-bind:class="commentKinou">
     <textarea
       v-model="inputComment"
@@ -22,6 +22,7 @@
       </li>
     </ul>
   </div>
+</p>
 </template>
 
 <script>

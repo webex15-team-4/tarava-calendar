@@ -3,7 +3,6 @@
   <!-- <div class="inputComment">{{ inputComment }}</div> -->
   <!-- show_returnのスタイルを適応 -->
   <!-- <div class="inputComment show_return">{{ inputComment }}</div> -->
-
   <div v-bind:class="commentKinou">
     <textarea
       v-model="inputComment"
@@ -84,5 +83,9 @@ export default {
 .show_return {
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.commentKinou {
+  border: 100px;
 }
 </style>

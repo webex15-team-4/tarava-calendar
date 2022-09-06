@@ -28,7 +28,7 @@ export default {
         console.log(this.inputComment)
         console.log(this.items)
       }
-    },
+    }
     edit() {
       if (this.inputComment !== "") {
         this.items.push({ text: this.inputComment })

@@ -30,7 +30,7 @@ export default {
     return {
       inputComment: "",
       items: [],
-      commentKinou: "",
+      commentKinou: true or false
     }
   },
   methods: {

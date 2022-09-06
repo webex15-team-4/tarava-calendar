@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -6,7 +7,21 @@
   <router-view />
   <CommentApp />
   <ScheduleApp />
+=======
+  <nav><router-link to="/">Home</router-link> |</nav>
+
+  <Calendar />
+>>>>>>> origin/master
 </template>
+<script>
+import Calendar from "@/components/CalendarVue.vue"
+
+export default {
+  components: {
+    Calendar,
+  },
+}
+</script>
 
 <script>
 import CommentApp from "./components/CommentApp.vue"

@@ -36,12 +36,12 @@ export default {
   methods: {
     commentRan: function () {
       if (this.commentKinou) {
-        this.commentKinou = false
-        console.log("コメント欄が消えたよ")
+        this.commentKinou = false,
       } else {
         this.commentKinou = true
-        console.log("コメント欄が出現したよ")
+      console.log("コメント欄が出現したよ")
       }
+
     },
 
     keyDownEnter() {

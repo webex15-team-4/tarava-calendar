@@ -37,7 +37,6 @@ export default {
     commentRan: function () {
       if (this.commentKinou) {
         this.commentKinou = false
-        console.log("コメント欄が消えたよ")
       } else {
         this.commentKinou = true
         console.log("コメント欄が出現したよ")

@@ -4,7 +4,7 @@
   <!-- show_returnのスタイルを適応 -->
   <!-- <div class="inputComment show_return">{{ inputComment }}</div> -->
 
-  <div v-if="commentKinou">
+  <div v-bind:class="commentKinou">
     <textarea
       v-model="inputComment"
       @keydown.enter.shift.exact="keyDownEnterShift"
@@ -30,7 +30,7 @@ export default {
     return {
       inputComment: "",
       items: [],
-      //commentKinou: true or false
+      commentKinou: false,
     }
   },
   methods: {

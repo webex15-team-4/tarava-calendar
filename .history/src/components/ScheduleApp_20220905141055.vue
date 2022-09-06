@@ -2,7 +2,7 @@
   <div class="inputContainer">
     <input type="text" v-model="inputComment" />
     <button v-on:click="edit">編集</button>
-    <button v-on:click="deletes">削除</button>
+    <button v-on:click="delete">削除</button>
   </div>
   <ul>
     <li v-for="(item, index) in items" :key="index">
@@ -28,7 +28,7 @@ export default {
         console.log(this.items)
       }
     },
-    deletes() {
+    delete() {
       if (this.inputComment !== "") {
         this.inputComment = ""
       }

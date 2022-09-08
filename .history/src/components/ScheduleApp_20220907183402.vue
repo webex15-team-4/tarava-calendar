@@ -14,7 +14,7 @@
       </li>
     </ul>
 
-    <!-- <select v-model="selectedTime">
+    <select v-model="selectedTime">
       <option disabled value="">開始</option>
       <option
         v-for="time in optionTimes"
@@ -23,7 +23,7 @@
       >
         {{ Time.name }}
       </option>
-    </select> -->
+    </select>
   </div>
 </template>
 

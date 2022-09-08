@@ -13,18 +13,18 @@
         <span>{{ item.text }}</span>
       </li>
     </ul>
-
-    <!-- <select v-model="selectedTime">
-      <option disabled value="">開始</option>
-      <option
-        v-for="time in optionTimes"
-        v-bind:value="time.name"
-        v-bind:key="time.id"
-      >
-        {{ Time.name }}
-      </option>
-    </select> -->
   </div>
+
+  <select v-model="selectedTime">
+    <option disabled value="">開始</option>
+    <option
+      v-for="time in optionTimes"
+      v-bind:value="time.name"
+      v-bind:key="time.id"
+    >
+      {{ Time.name }}
+    </option>
+  </select>
 </template>
 
 <script>

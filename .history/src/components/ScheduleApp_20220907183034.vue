@@ -13,18 +13,18 @@
         <span>{{ item.text }}</span>
       </li>
     </ul>
-
-    <!-- <select v-model="selectedTime">
-      <option disabled value="">開始</option>
-      <option
-        v-for="time in optionTimes"
-        v-bind:value="time.name"
-        v-bind:key="time.id"
-      >
-        {{ Time.name }}
-      </option>
-    </select> -->
   </div>
+
+  <!-- <select v-model="selectedTime">
+    <option disabled value="">開始</option>
+    <option
+      v-for="time in optionTimes"
+      v-bind:value="time.name"
+      v-bind:key="time.id"
+    >
+      {{ Time.name }}
+    </option>
+  </select> -->
 </template>
 
 <script>
@@ -34,12 +34,12 @@ export default {
       inputComment: "",
       items: [],
       scheduleKinou: false,
-      selectedTime: "",
-      optionTimes: [
-        { id: 1, name: "0:00" },
-        { id: 2, name: "1:00" },
-        { id: 3, name: "2:00" },
-      ],
+      // selectedTime: "",
+      // optionTimes: [
+      //   { id: 1, name: "0:00" },
+      //   { id: 2, name: "1:00" },
+      //   { id: 3, name: "2:00" },
+      // ],
     }
   },
   methods: {

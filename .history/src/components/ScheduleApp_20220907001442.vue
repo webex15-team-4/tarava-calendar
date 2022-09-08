@@ -1,30 +1,18 @@
 <template>
   <button v-on:click="scheduleRan">＋予定</button>
 
-  <div v-if="scheduleKinou">
-    <div class="inputContainer">
-      <input type="text" v-model="inputComment" />
-      <button v-on:click="push">追加</button>
-      <button v-on:click="edit">編集</button>
-      <button v-on:click="deletes">削除</button>
-    </div>
-    <ul>
-      <li v-for="(item, index) in items" :key="index">
-        <span>{{ item.text }}</span>
-      </li>
-    </ul>
-
-    <!-- <select v-model="selectedTime">
-      <option disabled value="">開始</option>
-      <option
-        v-for="time in optionTimes"
-        v-bind:value="time.name"
-        v-bind:key="time.id"
-      >
-        {{ Time.name }}
-      </option>
-    </select> -->
+  <div v-if="scheduleKinou"></div>
+  <div class="inputContainer">
+    <input type="text" v-model="inputComment" />
+    <button v-on:click="push">追加</button>
+    <button v-on:click="edit">編集</button>
+    <button v-on:click="deletes">削除</button>
   </div>
+  <ul>
+    <li v-for="(item, index) in items" :key="index">
+      <span>{{ item.text }}</span>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -34,12 +22,6 @@ export default {
       inputComment: "",
       items: [],
       scheduleKinou: false,
-      selectedTime: "",
-      optionTimes: [
-        { id: 1, name: "0:00" },
-        { id: 2, name: "1:00" },
-        { id: 3, name: "2:00" },
-      ],
     }
   },
   methods: {

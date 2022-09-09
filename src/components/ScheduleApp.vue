@@ -10,20 +10,20 @@
     </div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
-        <span>{{ item.text }}</span>
+        <span>{{ item.time }}:{{ item.text }}</span>
       </li>
     </ul>
 
-    <!-- <select v-model="selectedTime">
+    <select v-model="selectedTime">
       <option disabled value="">開始</option>
       <option
         v-for="time in optionTimes"
         v-bind:value="time.name"
         v-bind:key="time.id"
       >
-        {{ Time.name }}
+        {{ time.name }}
       </option>
-    </select> -->
+    </select>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
 
     push() {
       if (this.inputComment !== "") {
-        this.items.push({ text: this.inputComment })
+        this.items.push({ text: this.inputComment, time: this.selectedTime })
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)
@@ -63,7 +63,7 @@ export default {
     },
     edit() {
       if (this.inputComment !== "") {
-        this.items.push({ text: this.inputComment })
+        this.items.push({ text: this.inputComment, time: this.selectedTime })
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)

@@ -1,14 +1,21 @@
 <template>
-  <nav><router-link to="/">Home</router-link> |</nav>
-
-  <Calendar />
+  <div id="app">
+    <nav>
+      <router-link to="/">Home</router-link> |<router-link to="/login"
+        >ログイン</router-link
+      >
+    </nav>
+    <Calendar />
+    <Login />
+  </div>
 </template>
 <script>
 import Calendar from "@/components/CalendarVue.vue"
-
+import Login from "@/components/LoginView.vue"
 export default {
   components: {
     Calendar,
+    Login,
   },
 }
 </script>

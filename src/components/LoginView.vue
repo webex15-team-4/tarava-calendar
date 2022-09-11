@@ -21,13 +21,16 @@ export default {
   methods: {
     login() {
       const auth = getAuth()
+      const provider = new GoogleAuthProvider()
       auth.languageCode = "ja"
       signInWithPopup(auth, provider)
-      const provider = new GoogleAuthProvider()
-      provider.addScope("https://www.googleapis.com/auth/contacts.readonly")
-      provider.setCustomParameters({
-        login_hint: "user@example.com",
-      })
+        .then((result) => {
+          const user = result.user
+          console.log(user)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
   },
 }

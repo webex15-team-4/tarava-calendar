@@ -10,22 +10,9 @@
     </div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
-        <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}~{{
-            item.lastTime
-          }}</span
-        >
+        <span>{{ item.time }}:{{ item.text }}</span>
       </li>
     </ul>
-
-    <input type="date" name="date" v-model="selectDate" />
-    <option
-      v-for="date in optionDate"
-      v-bind:value="date.name"
-      v-bind:key="date.id"
-    >
-      {{ date.name }}
-    </option>
 
     <select v-model="selectedTime">
       <option disabled value="">開始</option>
@@ -37,14 +24,14 @@
         {{ time.name }}
       </option>
     </select>
-    <select v-model="selectedTimeLast">
+    <select v-model="selectedTime">
       <option disabled value="">終了</option>
       <option
-        v-for="lastTime in optionTimesLast"
-        v-bind:value="lastTime.name"
-        v-bind:key="lastTime.id"
+        v-for="time in optionTimesLast"
+        v-bind:value="time.name"
+        v-bind:key="time.id"
       >
-        {{ lastTime.name }}
+        {{ time.name }}
       </option>
     </select>
   </div>
@@ -57,14 +44,12 @@ export default {
       inputComment: "",
       items: [],
       scheduleKinou: false,
-      selectDate: "",
       selectedTime: "",
       optionTimes: [
         { id: 1, name: "0:00" },
         { id: 2, name: "1:00" },
         { id: 3, name: "2:00" },
       ],
-      selectedTimeLast: "",
       optionTimesLast: [
         { id: 1, name: "0:00" },
         { id: 2, name: "1:00" },
@@ -85,12 +70,7 @@ export default {
 
     push() {
       if (this.inputComment !== "") {
-        this.items.push({
-          text: this.inputComment,
-          date: this.selectDate,
-          time: this.selectedTime,
-          lastTime: this.selectedTimeLast,
-        })
+        this.items.push({ text: this.inputComment, time: this.selectedTime })
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)
@@ -98,12 +78,7 @@ export default {
     },
     edit() {
       if (this.inputComment !== "") {
-        this.items.push({
-          text: this.inputComment,
-          data: this.selectDate,
-          time: this.selectedTime,
-          lastTime: this.selectedTimeLast,
-        })
+        this.items.push({ text: this.inputComment, time: this.selectedTime })
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)

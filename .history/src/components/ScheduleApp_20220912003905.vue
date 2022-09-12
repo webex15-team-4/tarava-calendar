@@ -18,14 +18,16 @@
       </li>
     </ul>
 
-    <input type="date" name="date" v-model="selectDate" />
-    <option
-      v-for="date in optionDate"
-      v-bind:value="date.name"
-      v-bind:key="date.id"
-    >
-      {{ date.name }}
-    </option>
+    <select v-model="selectDate">
+      <input type="date" name="date" />
+      <option
+        v-for="date in optionDate"
+        v-bind:value="date.name"
+        v-bind:key="date.id"
+      >
+        {{ date.name }}
+      </option>
+    </select>
 
     <select v-model="selectedTime">
       <option disabled value="">開始</option>

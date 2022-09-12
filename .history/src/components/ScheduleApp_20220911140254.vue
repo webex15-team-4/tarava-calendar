@@ -10,23 +10,11 @@
     </div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
-        <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}~{{
-            item.lastTime
-          }}</span
-        >
+        <span>{{ item.text }} {{ item.time }}~{{ item.lastTime }}</span>
       </li>
     </ul>
 
-    <input type="date" name="date" v-model="selectDate" />
-    <option
-      v-for="date in optionDate"
-      v-bind:value="date.name"
-      v-bind:key="date.id"
-    >
-      {{ date.name }}
-    </option>
-
+    <input type="date" name="select" />
     <select v-model="selectedTime">
       <option disabled value="">開始</option>
       <option
@@ -57,7 +45,6 @@ export default {
       inputComment: "",
       items: [],
       scheduleKinou: false,
-      selectDate: "",
       selectedTime: "",
       optionTimes: [
         { id: 1, name: "0:00" },
@@ -87,7 +74,6 @@ export default {
       if (this.inputComment !== "") {
         this.items.push({
           text: this.inputComment,
-          date: this.selectDate,
           time: this.selectedTime,
           lastTime: this.selectedTimeLast,
         })
@@ -100,7 +86,6 @@ export default {
       if (this.inputComment !== "") {
         this.items.push({
           text: this.inputComment,
-          data: this.selectDate,
           time: this.selectedTime,
           lastTime: this.selectedTimeLast,
         })

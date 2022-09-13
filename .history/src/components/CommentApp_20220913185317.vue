@@ -4,7 +4,11 @@
   <!-- show_returnのスタイルを適応 -->
   <!-- <div class="inputComment show_return">{{ inputComment }}</div> -->
 
-  <div v-if="commentKinou">
+  <div
+    v-if="commentKinou"
+    class="commentKinou"
+    v-bind:style="{ backgroundColor: bgColor }"
+  >
     <textarea
       v-model="inputComment"
       @keydown.enter.shift.exact="keyDownEnterShift"
@@ -26,7 +30,7 @@
 
 <script>
 export default {
-  // props: ["commentRan"],
+  props: ["bgColor"],
   data() {
     return {
       inputComment: "",

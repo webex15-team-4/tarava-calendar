@@ -24,10 +24,8 @@
       </tbody>
     </table>
   </div>
-  <div v-if="commentKinou">
-    <!-- <p v-for="(comment, index) in comments" :key="index">
-      {{ comment }}
-    </p> -->
+  <div v-if="commentKinou" v-for="(comment, index) in comments" :key="index">
+    {{ comment }}
     <textarea
       v-model="inputComment"
       @keydown.enter.shift.exact="keyDownEnterShift"

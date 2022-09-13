@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  // props: ["commentRan"],
+  props: ["item.text"],
   data() {
     return {
       inputComment: "",

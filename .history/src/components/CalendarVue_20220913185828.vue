@@ -24,27 +24,6 @@
       </tbody>
     </table>
   </div>
-  <div v-if="commentKinou">
-    <!-- <p v-for="(comment, index) in comments" :key="index">
-      {{ comment }}
-    </p> -->
-    <textarea
-      v-model="inputComment"
-      @keydown.enter.shift.exact="keyDownEnterShift"
-      class="textarea"
-    />
-    <!-- ↑あえて書いてた\nの明示化を外した -->
-    <button v-on:click="comment">コメント</button>
-    <button v-on:click="cancel">キャンセル</button>
-
-    <ul>
-      <!-- <li v-for="(item, index) in items" :key="index"> -->
-      <!-- show_returnのスタイルを適応 -->
-      <li class="show_return" v-for="(item, index) in items" :key="index">
-        <span>{{ item.text }}</span>
-      </li>
-    </ul>
-  </div>
 </template>
 
 <script>
@@ -59,7 +38,6 @@ export default {
       year: 2021,
       month: 3,
       today: "",
-      comments: [],
       commentKinou: false,
     }
   },

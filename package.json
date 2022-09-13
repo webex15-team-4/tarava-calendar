@@ -10,12 +10,10 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "firebase": "^9.9.3",
-<<<<<<< HEAD
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
-=======
-    "vue": "^3.2.13"
->>>>>>> a8a5898f54619e041f952bebc119b7041f3c808a
+
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -31,3 +29,5 @@
     "prettier": "^2.4.1"
   }
 }
+
+

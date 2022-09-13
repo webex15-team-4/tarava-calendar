@@ -1,14 +1,16 @@
 <template>
   <nav><router-link to="/">Home</router-link> |</nav>
-
   <Calendar />
+  <ColorComponent />
 </template>
+
 <script>
 import Calendar from "@/components/CalendarVue.vue"
-
+import ColorComponent from "@/components/ColorComponent.vue"
 export default {
   components: {
     Calendar,
+    ColorComponent,
   },
 }
 </script>

@@ -1,5 +1,4 @@
 <template>
-
   <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -11,20 +10,18 @@
   <!-- <nav><router-link to="/">Home</router-link> |</nav> -->
 
   <Calendar />
-
 </template>
 
 <script>
 import CommentApp from "./components/CommentApp.vue"
 import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
-//import Login from "@/components/LoginView.vue"
+
 export default {
   components: {
     CommentApp,
     ScheduleApp,
     Calendar,
-    //Login,
   },
 }
 </script>

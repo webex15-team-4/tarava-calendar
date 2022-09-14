@@ -49,7 +49,7 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-// import { doc, setDoc } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore";
 export default {
   // components: {
   //   CommentApp,
@@ -142,7 +142,7 @@ export default {
     let actualDay = date.getDate()
     this.today = this.year + "-" + this.month + "-" + actualDay
   },
-  comment() {
+  async comment() {
     if (this.inputComment !== "") {
       this.items.push({ text: this.inputComment })
       this.inputComment = ""
@@ -154,16 +154,16 @@ export default {
     }
   },
 
-  // Add a new document in collection "cities"
-  //   await setDoc(doc(db, "calende", ""), {
-  //   "2022/09/14":{
-  //     "comment":["コメント","コメントしました"],
-  //     "event":{
-  //       "start":"10:00",
-  //       "ebd":"11:00",
-  //       "content":"遊びに行く",
-  //     }},
-  // });
+// Add a new document in collection "cities"
+await setDoc(doc(db, "calende", ""), {
+  "2022/09/14":{
+    "comment":["コメント","コメントしました"],
+    "event":{
+      "start":"10:00",
+      "ebd":"11:00",
+      "content":"遊びに行く",
+    }},
+});
 
   cancel() {
     if (this.inputComment !== "") {

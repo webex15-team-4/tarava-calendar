@@ -49,12 +49,10 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-// import { doc, setDoc } from "firebase/firestore"
 export default {
   // components: {
   //   CommentApp,
   // },
-
   data() {
     return {
       weekdays: ["日", "月", "火", "水", "木", "金", "土"],
@@ -153,18 +151,6 @@ export default {
       alert("文字を入力してね")
     }
   },
-
-  // Add a new document in collection "cities"
-  //   await setDoc(doc(db, "calende", ""), {
-  //   "2022/09/14":{
-  //     "comment":["コメント","コメントしました"],
-  //     "event":{
-  //       "start":"10:00",
-  //       "ebd":"11:00",
-  //       "content":"遊びに行く",
-  //     }},
-  // });
-
   cancel() {
     if (this.inputComment !== "") {
       this.inputComment = ""

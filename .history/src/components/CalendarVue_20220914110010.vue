@@ -49,7 +49,7 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-// import { doc, setDoc } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
 export default {
   // components: {
   //   CommentApp,

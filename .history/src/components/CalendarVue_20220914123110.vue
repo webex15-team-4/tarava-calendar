@@ -49,7 +49,7 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-import { db, doc, setDoc } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
 export default {
   // components: {
   //   CommentApp,
@@ -133,39 +133,6 @@ export default {
       }
       return false
     },
-    async comment() {
-      if (this.inputComment !== "") {
-        this.items.push({ text: this.inputComment })
-        this.inputComment = ""
-        console.log(this.inputComment)
-        console.log(this.items)
-        console.log("コメントできたよ")
-      } else {
-        alert("文字を入力してね")
-      }
-      // Add a new document in collection "cities"
-      await setDoc(doc(db, "calende", "0"), {
-        "2022/09/14": {
-          comment: ["コメント", "コメントしました"],
-          event: {
-            start: "10:00",
-            ebd: "11:00",
-            content: "遊びに行く",
-          },
-        },
-      })
-    },
-
-    cancel() {
-      if (this.inputComment !== "") {
-        this.inputComment = ""
-      } else
-        this.inputComment === "",
-          {
-            // this.inputComment = ""
-          }
-      this.inputComment = ""
-    },
   },
 
   mounted() {
@@ -174,6 +141,39 @@ export default {
     this.month = date.getMonth() + 1
     let actualDay = date.getDate()
     this.today = this.year + "-" + this.month + "-" + actualDay
+  },
+  async comment() {
+    if (this.inputComment !== "") {
+      this.items.push({ text: this.inputComment })
+      this.inputComment = ""
+      console.log(this.inputComment)
+      console.log(this.items)
+      console.log("コメントできたよ")
+    } else {
+      alert("文字を入力してね")
+    }
+    // Add a new document in collection "cities"
+    await setDoc(doc(db, "calende", "0"), {
+      "2022/09/14": {
+        comment: ["コメント", "コメントしました"],
+        event: {
+          start: "10:00",
+          ebd: "11:00",
+          content: "遊びに行く",
+        },
+      },
+    })
+  },
+
+  cancel() {
+    if (this.inputComment !== "") {
+      this.inputComment = ""
+    } else
+      this.inputComment === "",
+        {
+          // this.inputComment = ""
+        }
+    this.inputComment = ""
   },
 }
 </script>

@@ -272,13 +272,13 @@
 .Gcolor4 {
   width: 40px;
   height: 40px;
-  background-image: linear-gradient(to right, #0000ff #b2b2ff);
+  background-image: linear-gradient(to right, #0000ff, #cab7ff);
   border-radius: 50% 50% 0 50%;
 }
 .Gcolor5 {
   width: 40px;
   height: 40px;
-  background-image: linear-gradient(to right, #007fff #b7dbff);
+  background-image: linear-gradient(to right, #007fff, #b7dbff);
   border-radius: 50% 50% 0 50%;
 }
 .Gcolor6 {

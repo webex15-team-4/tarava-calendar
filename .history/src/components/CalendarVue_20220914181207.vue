@@ -51,7 +51,6 @@
 // import CommentApp from "./components/CommentApp.vue"
 import { doc, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
-import "./firebase.js"
 export default {
   // components: {
   //   CommentApp,
@@ -211,10 +210,5 @@ td {
 }
 .today {
   background-color: pink;
-}
-
-.show_return {
-  white-space: pre-wrap;
-  word-wrap: break-word;
 }
 </style>

@@ -51,7 +51,6 @@
 // import CommentApp from "./components/CommentApp.vue"
 import { doc, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
-import "./firebase.js"
 export default {
   // components: {
   //   CommentApp,

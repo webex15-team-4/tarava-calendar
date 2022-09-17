@@ -49,10 +49,8 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-import { query } from "express"
-import { collection, addDoc, where } from "firebase/firestore"
+import { doc, addDoc } from "firebase/firestore"
 import { db } from "../firebase"
-// import { getAuth } from "firebase/auth"
 
 export default {
   // components: {
@@ -92,18 +90,6 @@ export default {
       }
       return calendar
     },
-  },
-  created() {
-
-    const q = query(
-      collection(db, "Comment"),
-      where("userEmail", "==", email)
-    )
-    const querySnapshot = await getDocs(q)
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-          this.comments.push({ text: doc.data().text })
-        })
   },
   methods: {
     commentRan: function () {
@@ -152,36 +138,24 @@ export default {
     async comment() {
       if (this.inputComment !== "") {
         this.items.push({ text: this.inputComment })
+        this.inputComment = ""
         console.log(this.inputComment)
-
-        let memo = {
-          text: this.inputComment,
-          // userEmail: email,
-        }
-        await addDoc(collection(db, "Comment"), memo)
-
-        this.inputMemo = ""
+        console.log(this.items)
+        console.log("コメントできたよ")
       } else {
-        alert("コメントを入力してください")
+        alert("文字を入力してね")
       }
-      // if (this.inputComment !== "") {
-      //   this.items.push({ text: this.inputComment })
-      //   this.inputComment = ""
-      //   console.log(this.inputComment)
-      //   console.log(this.items)
-      //   console.log("コメントできたよ")
-      // } else {
-      //   alert("文字を入力してね")
-      // }
-      // // Add a new document in collection "cities"
-      // await addDoc(doc(db, "calender", "0"), {
-      //   "2022/09/14": {
-      //     comment: ["コメント", "コメントしました"],
-      //     event: {
-      //       start: "10:00",
-      //       ebd: "11:00",
-      //       content: "遊びに行く",
-      //     },
+      // Add a new document in collection "cities"
+      await addDoc(doc(db, "calender", "0"), {
+        "2022/09/14": {
+          comment: ["コメント", "コメントしました"],
+          event: {
+            start: "10:00",
+            ebd: "11:00",
+            content: "遊びに行く",
+          },
+        },
+      })
     },
 
     cancel() {

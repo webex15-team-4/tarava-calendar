@@ -94,16 +94,17 @@ export default {
     },
   },
   created() {
-
-    const q = query(
-      collection(db, "Comment"),
-      where("userEmail", "==", email)
-    )
-    const querySnapshot = await getDocs(q)
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-          this.comments.push({ text: doc.data().text })
-        })
+    onAuthStateChanged(auth, async (user) => {
+      const q = query(
+        collection(db, "Comment"),
+        where("userEmail", "==", email)
+      )
+      const querySnapshot = await getDocs(q)
+      console.log(querySnapshot)
+      querySnapshot.forEach((doc) => {
+        this.comments.push({ text: doc.data().text })
+      })
+    })
   },
   methods: {
     commentRan: function () {

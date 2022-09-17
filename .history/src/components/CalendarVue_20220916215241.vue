@@ -49,10 +49,8 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-import { query } from "express"
-import { collection, addDoc, where } from "firebase/firestore"
+import { doc, addDoc } from "firebase/firestore"
 import { db } from "../firebase"
-// import { getAuth } from "firebase/auth"
 
 export default {
   // components: {
@@ -92,18 +90,6 @@ export default {
       }
       return calendar
     },
-  },
-  created() {
-
-    const q = query(
-      collection(db, "Comment"),
-      where("userEmail", "==", email)
-    )
-    const querySnapshot = await getDocs(q)
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-          this.comments.push({ text: doc.data().text })
-        })
   },
   methods: {
     commentRan: function () {
@@ -150,16 +136,23 @@ export default {
       return false
     },
     async comment() {
-      if (this.inputComment !== "") {
-        this.items.push({ text: this.inputComment })
-        console.log(this.inputComment)
+      if (this.inputMemo !== "") {
+        this.comments.push({ text: this.inputMemo })
+        console.log(this.inputMemo)
 
-        let memo = {
-          text: this.inputComment,
-          // userEmail: email,
+        const auth = getAuth()
+        const user = auth.currentUser
+        if (user !== null) {
+          user.providerData.forEach(async (profile) => {
+            let memo = {
+              text: this.inputMemo,
+              userName: profile.displayName,
+              userEmail: profile.email,
+              userImage: profile.photoURL,
+            }
+            await addDoc(collection(db, "userComment"), memo)
+          })
         }
-        await addDoc(collection(db, "Comment"), memo)
-
         this.inputMemo = ""
       } else {
         alert("コメントを入力してください")
@@ -182,6 +175,8 @@ export default {
       //       ebd: "11:00",
       //       content: "遊びに行く",
       //     },
+        },
+      })
     },
 
     cancel() {

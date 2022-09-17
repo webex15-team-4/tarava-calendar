@@ -33,7 +33,6 @@ export default {
     ScheduleApp,
     Calendar,
     Login,
-    KUziApp,
   },
 }
 </script>

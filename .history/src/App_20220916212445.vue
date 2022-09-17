@@ -10,7 +10,6 @@
   <ScheduleApp />
 
   <Calendar />
-  <KUziApp />
 
   =======
   <div id="app">
@@ -33,7 +32,6 @@ export default {
     ScheduleApp,
     Calendar,
     Login,
-    KUziApp,
   },
 }
 </script>

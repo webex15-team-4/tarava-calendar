@@ -49,8 +49,7 @@
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-import { query } from "express"
-import { collection, addDoc, where } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
 import { db } from "../firebase"
 // import { getAuth } from "firebase/auth"
 
@@ -92,18 +91,6 @@ export default {
       }
       return calendar
     },
-  },
-  created() {
-
-    const q = query(
-      collection(db, "Comment"),
-      where("userEmail", "==", email)
-    )
-    const querySnapshot = await getDocs(q)
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-          this.comments.push({ text: doc.data().text })
-        })
   },
   methods: {
     commentRan: function () {
@@ -156,7 +143,8 @@ export default {
 
         let memo = {
           text: this.inputComment,
-          // userEmail: email,
+
+          userEmail: email,
         }
         await addDoc(collection(db, "Comment"), memo)
 

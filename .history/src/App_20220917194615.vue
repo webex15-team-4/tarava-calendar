@@ -1,17 +1,24 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |<router-link to="/login"
-      >ログイン</router-link
-    >|
+    <router-link to="/">Home</router-link> |
+    <router-link to="/login">ログイン</router-link>|
     <router-link to="/about">About</router-link>
   </nav>
-  <router-view />
+  <!-- <router-view /> -->
   <!-- <CommentApp /> -->
   <ScheduleApp />
 
   <Calendar />
-  <Login />
-  <KUziApp />
+  <!-- <KUziApp /> -->
+
+  <!-- =======
+  <div id="app">
+    <nav></nav>
+    <!-- <Calendar /> -->
+  <!-- <Login />
+  </div>
+  >>>>>>> master -->
+  -->
 </template>
 
 <script>
@@ -19,14 +26,14 @@
 import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
 import Login from "@/components/LoginView.vue"
-import KUziApp from "@/components/KUziApp.vue"
+// import KUziApp from "@/components/KUziApp.vue"
 export default {
   components: {
     // CommentApp,
     ScheduleApp,
     Calendar,
     Login,
-    KUziApp,
+    // KUziApp,
   },
 }
 </script>

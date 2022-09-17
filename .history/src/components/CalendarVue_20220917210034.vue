@@ -99,7 +99,7 @@ export default {
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
-      this.items.push({ text: doc.data().text })
+      this.comments.push({ text: doc.data().text })
     })
   },
   methods: {

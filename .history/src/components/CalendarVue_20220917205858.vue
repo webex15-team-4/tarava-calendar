@@ -50,7 +50,7 @@
 <script>
 // import CommentApp from "./components/CommentApp.vue"
 //import { query } from "express"
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
+import { collection, addDoc, where, query } from "firebase/firestore"
 import { db } from "../firebase"
 // import { getAuth } from "firebase/auth"
 
@@ -94,12 +94,12 @@ export default {
     },
   },
   async created() {
-    const q = query(collection(db, "Comment"))
+    const q = query(collection(db, "Comment"),
     //where("userEmail", "==", email))
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
-      this.items.push({ text: doc.data().text })
+      this.comments.push({ text: doc.data().text })
     })
   },
   methods: {

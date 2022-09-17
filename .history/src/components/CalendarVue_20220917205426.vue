@@ -34,14 +34,19 @@
       class="textarea"
     />
     <!-- ↑あえて書いてた\nの明示化を外した -->
-    <button v-on:click="comment">コメント</button>
+    <button v-on:click="comment(commentAreaId)">コメント</button>
     <button v-on:click="cancel">キャンセル</button>
+    <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button>
 
-    <ul>
+    <ul v-if="commentAreaId !== null">
       <!-- <li v-for="(item, index) in items" :key="index"> -->
       <!-- show_returnのスタイルを適応 -->
-      <li class="show_return" v-for="(item, index) in items" :key="index">
-        <span>{{ item.text }}</span>
+      <li
+        class="show_return"
+        v-for="(item, index) in weekData[commentAreaID]items"
+        :key="index"
+      >
+        <span>{{ item }}</span>
       </li>
     </ul>
   </div>
@@ -50,7 +55,8 @@
 <script>
 // import CommentApp from "./components/CommentApp.vue"
 //import { query } from "express"
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
+//import { where, query } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
 import { db } from "../firebase"
 // import { getAuth } from "firebase/auth"
 
@@ -68,6 +74,11 @@ export default {
       inputComment: "",
       items: [],
       commentKinou: false,
+      weekData: [
+        { id: 0, text: "1", items: [] },
+        { id: 1, text: "2", items: [] },
+      ],
+      commentAreaId: null,
     }
   },
   computed: {
@@ -93,15 +104,33 @@ export default {
       return calendar
     },
   },
-  async created() {
-    const q = query(collection(db, "Comment"))
-    //where("userEmail", "==", email))
-    const querySnapshot = await getDocs(q)
-    console.log(querySnapshot)
-    querySnapshot.forEach((doc) => {
-      this.items.push({ text: doc.data().text })
-    })
-  },
+  // created() {
+  //   onAuthStateChanged(auth, async (user) => {
+  //     if (user) {
+  //       const user = auth.currentUser
+  //       const displayName = user.displayName
+  //       const email = user.email
+  //       const photoURL = user.photoURL
+  //       await setDoc(doc(db, "users", user.uid), {
+  //         userName: displayName,
+  //         userEmail: email,
+  //         userImg: photoURL,
+  //       })
+  //       this.userImg = photoURL
+  //       this.userEmail = email
+  //       this.userName = displayName
+  //       this.loginName = false
+  //       this.acountDelet = true
+  //       this.memoArea = true
+
+  //   const q = query(collection(db, "Comment"),
+  //   //where("userEmail", "==", email))
+  //   const querySnapshot = await getDocs(q)
+  //   console.log(querySnapshot)
+  //   querySnapshot.forEach((doc) => {
+  //     this.comments.push({ text: doc.data().text })
+  //   })
+  // }
   methods: {
     commentRan: function () {
       if (this.commentKinou) {

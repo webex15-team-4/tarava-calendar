@@ -50,7 +50,7 @@
 <script>
 // import CommentApp from "./components/CommentApp.vue"
 //import { query } from "express"
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
+import { collection, addDoc, where, query } from "firebase/firestore"
 import { db } from "../firebase"
 // import { getAuth } from "firebase/auth"
 
@@ -93,15 +93,33 @@ export default {
       return calendar
     },
   },
-  async created() {
-    const q = query(collection(db, "Comment"))
+  created() {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const user = auth.currentUser
+        const displayName = user.displayName
+        const email = user.email
+        const photoURL = user.photoURL
+        await setDoc(doc(db, "users", user.uid), {
+          userName: displayName,
+          userEmail: email,
+          userImg: photoURL,
+        })
+        this.userImg = photoURL
+        this.userEmail = email
+        this.userName = displayName
+        this.loginName = false
+        this.acountDelet = true
+        this.memoArea = true
+
+    const q = query(collection(db, "Comment"),
     //where("userEmail", "==", email))
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
-      this.items.push({ text: doc.data().text })
+      this.comments.push({ text: doc.data().text })
     })
-  },
+  }
   methods: {
     commentRan: function () {
       if (this.commentKinou) {

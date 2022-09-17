@@ -10,8 +10,15 @@
   <ScheduleApp />
 
   <Calendar />
-  <Login />
   <KUziApp />
+
+  =======
+  <div id="app">
+    <nav></nav>
+    <Calendar />
+    <Login />
+  </div>
+  >>>>>>> master
 </template>
 
 <script>

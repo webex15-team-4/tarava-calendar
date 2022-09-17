@@ -94,8 +94,7 @@ export default {
     },
   },
   created() {
-    const q = query(collection(db, "Comment"),
-    //where("userEmail", "==", email))
+    const q = query(collection(db, "Comment"), where("userEmail", "==", email))
     const querySnapshot = getDocs(q)
     console.log(querySnapshot)
     querySnapshot.forEach((doc) => {

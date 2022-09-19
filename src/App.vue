@@ -16,14 +16,13 @@
 import CommentApp from "./components/CommentApp.vue"
 import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
-import ColorApp from "@/components/ColorApp.vue"
+
 //import Login from "@/components/LoginView.vue"
 export default {
   components: {
     CommentApp,
     ScheduleApp,
     Calendar,
-    ColorApp,
   },
 }
 </script>

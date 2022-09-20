@@ -75,63 +75,63 @@
         </option>
       </select>
       <!-- 78～134行目 さえちゃんの色機能のとこ -->
-      <!-- ボタンを押したら色機能を表示 -->
-      <div v-if="isVisible">
-        <button v-on:click="irokinou">背景色を変更</button>
-      </div>
-      <!-- 予定の背景の色を変化...クリックした色を表示させる
+       <!-- ボタンを押したら色機能を表示 -->
+    <div v-if="isVisible">
+      <button v-on:click="irokinou">背景色を変更</button>
+    </div>
+    <!-- 予定の背景の色を変化...クリックした色を表示させる
     <div class="output" :style="bgColor"></div> -->
 
-      <!-- Paletteを作る -->
-      <!-- デフォルトカラー14色 -->
-      <section v-if="colorArea">
-        <div class="DefaultPalette">
-          <div
-            v-for="(defaultColor, defaultColorIndex) in defaultColors"
-            :key="defaultColorIndex"
-            @click="defaultColorBtn(defaultColor.id)"
-          >
-            <div :class="defaultColor.colorid">{{ defaultColor.color }}</div>
-          </div>
+    <!-- Paletteを作る -->
+    <!-- デフォルトカラー14色 -->
+    <section v-if="colorArea">
+      <div class="DefaultPalette">
+        <div
+          v-for="(defaultColor, defaultColorIndex) in defaultColors"
+          :key="defaultColorIndex"
+          @click="defaultColorBtn(defaultColor.id)"
+        >
+          <div :class="defaultColor.colorid">{{ defaultColor.color }}</div>
         </div>
-        <!-- パステルカラー12色 -->
-        <div class="PastelPalette">
-          <br />
-          <div
-            v-for="(pastelColor, pastelColorIndex) in pastelColors"
-            :key="pastelColorIndex"
-            @click="pastelColorBtn(pastelColor.id)"
-          >
-            <div :class="pastelColor.colorid">{{ pastelColor.color }}</div>
-          </div>
+      </div>
+      <!-- パステルカラー12色 -->
+      <div class="PastelPalette">
+        <br />
+        <div
+          v-for="(pastelColor, pastelColorIndex) in pastelColors"
+          :key="pastelColorIndex"
+          @click="pastelColorBtn(pastelColor.id)"
+        >
+          <div :class="pastelColor.colorid">{{ pastelColor.color }}</div>
         </div>
+      </div>
 
-        <!-- グラデーション11色 -->
-        <div class="GradationColor">
-          <br />
-          <div
-            v-for="(gradationColor, gradationColorIndex) in gradationColors"
-            :key="gradationColorIndex"
-            @click="gradationColorBtn(gradationColor.id)"
-          >
-            <div :class="gradationColor.colorid">
-              {{ gradationColor.color }}
-            </div>
+      <!-- グラデーション11色 -->
+      <div class="GradationColor">
+        <br />
+        <div
+          v-for="(gradationColor, gradationColorIndex) in gradationColors"
+          :key="gradationColorIndex"
+          @click="gradationColorBtn(gradationColor.id)"
+        >
+          <div :class="gradationColor.colorid">
+            {{ gradationColor.color }}
           </div>
         </div>
+      </div>
 
-        <!-- ミックス6色 -->
-        <div class="MixColor">
-          <br />
-          <div
-            v-for="(mixColor, mixColorIndex) in mixColors"
-            :key="mixColorIndex"
-            @click="mixColorBtn(mixColor.id)"
-          >
-            <div :class="mixColor.colorid">{{ mixColor.color }}</div>
-          </div>
+      <!-- ミックス6色 -->
+      <div class="MixColor">
+        <br />
+        <div
+          v-for="(mixColor, mixColorIndex) in mixColors"
+          :key="mixColorIndex"
+          @click="mixColorBtn(mixColor.id)"
+        >
+          <div :class="mixColor.colorid">{{ mixColor.color }}</div>
         </div>
-      </section>
+      </div>
+    </section>
     </div>
     <br />
 
@@ -144,9 +144,7 @@
   <div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
-        <!--さえちゃんの色機能のとこ  -->
-      </li>
-
+      <!--さえちゃんの色機能のとこ  -->
       <li v-for="(item, index) in items" :key="index" :style="bgColor">
         <span
           >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
@@ -158,6 +156,7 @@
           <p :class="{ index: item.index }">{{ item.text }}</p>
           <button v-on:click="deleteBtn(commentIndex)">削除</button>
         </label>
+      </li>
       </li>
     </ul>
   </div>

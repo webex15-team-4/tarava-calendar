@@ -1,21 +1,23 @@
 <template>
+
   <div id="app">
     <Login />
     <Calendar />
   </div>
+
 </template>
 
 <script>
 import CommentApp from "./components/CommentApp.vue"
 import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
+
 //import Login from "@/components/LoginView.vue"
 export default {
   components: {
     CommentApp,
     ScheduleApp,
     Calendar,
-    //Login,
   },
 }
 </script>

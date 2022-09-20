@@ -14,6 +14,7 @@
       <tbody>
         <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
           <td
+            v-on:click="dayNumber"
             v-for="(dayNumber, dayNumberIndex) in weekData"
             :key="dayNumberIndex"
             :class="{ today: isToday(dayNumber) }"
@@ -25,7 +26,6 @@
     </table>
   </div>
 </template>
--->
 
 <script>
 export default {
@@ -61,6 +61,16 @@ export default {
     },
   },
   methods: {
+    dayNumber: function () {
+      if (this.commentKinou) {
+        this.commentKinou = false
+        console.log("コメント欄が消えたよ")
+      } else {
+        this.commentKinou = true
+        console.log("コメント欄が出現したよ")
+      }
+    },
+
     lastMonth: function () {
       if (this.month == 1) {
         this.year--

@@ -1,21 +1,22 @@
 <template>
-  <div id="app">
-    <Login />
-    <Calendar />
-  </div>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view />
+  <commentApp />
 </template>
 
 <script>
-import CommentApp from "./components/CommentApp.vue"
-import ScheduleApp from "@/components/ScheduleApp.vue"
-import Calendar from "@/components/CalendarVue.vue"
-//import Login from "@/components/LoginView.vue"
+import commentApp from "@/components/CommentApp.vue"
+
 export default {
-  components: {
-    CommentApp,
-    ScheduleApp,
-    Calendar,
-    //Login,
+  data() {
+    return {
+      components: {
+        commentApp,
+      },
+    }
   },
 }
 </script>

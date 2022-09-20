@@ -18,23 +18,45 @@
             :key="dayNumberIndex"
             :class="{ today: isToday(dayNumber) }"
           >
-            <span>{{ dayNumber }}</span>
+            <span v-on:click="commentRan"> <CommentApp />{{ dayNumber }}</span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div v-if="commentKinou">
+    <textarea
+      v-model="inputComment"
+      @keydown.enter.shift.exact="keyDownEnterShift"
+      class="textarea"
+    />
+    <!-- ↑あえて書いてた\nの明示化を外した -->
+    <button v-on:click="comment">コメント</button>
+    <button v-on:click="cancel">キャンセル</button>
+
+    <ul>
+      <!-- <li v-for="(item, index) in items" :key="index"> -->
+      <!-- show_returnのスタイルを適応 -->
+      <li class="show_return" v-for="(item, index) in items" :key="index">
+        <span>{{ item.text }}</span>
+      </li>
+    </ul>
+  </div>
 </template>
--->
 
 <script>
+// import CommentApp from "./components/CommentApp.vue"
 export default {
+  // components: {
+  //   CommentApp,
+  // },
   data() {
     return {
       weekdays: ["日", "月", "火", "水", "木", "金", "土"],
       year: 2021,
       month: 3,
       today: "",
+      commentKinou: false,
     }
   },
   computed: {
@@ -61,6 +83,16 @@ export default {
     },
   },
   methods: {
+    commentRan: function () {
+      if (this.commentKinou) {
+        this.commentKinou = false
+        console.log("コメント欄が消えたよ")
+      } else {
+        this.commentKinou = true
+        console.log("コメント欄が出現したよ")
+      }
+    },
+
     lastMonth: function () {
       if (this.month == 1) {
         this.year--

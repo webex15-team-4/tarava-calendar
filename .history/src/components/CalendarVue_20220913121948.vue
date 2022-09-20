@@ -18,14 +18,13 @@
             :key="dayNumberIndex"
             :class="{ today: isToday(dayNumber) }"
           >
-            <span>{{ dayNumber }}</span>
+            <span v-on:click="dayNumber">{{ dayNumber }}</span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
--->
 
 <script>
 export default {
@@ -61,6 +60,16 @@ export default {
     },
   },
   methods: {
+    dayNumber: function () {
+      if (this.commentKinou) {
+        this.commentKinou = false
+        console.log("コメント欄が消えたよ")
+      } else {
+        this.commentKinou = true
+        console.log("コメント欄が出現したよ")
+      }
+    },
+
     lastMonth: function () {
       if (this.month == 1) {
         this.year--

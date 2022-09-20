@@ -18,23 +18,28 @@
             :key="dayNumberIndex"
             :class="{ today: isToday(dayNumber) }"
           >
-            <span>{{ dayNumber }}</span>
+            <span v-on:click="dayNumber2">{{ dayNumber }}</span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <CommentApp />
 </template>
--->
 
 <script>
+import CommentApp from "./components/CommentApp.vue"
 export default {
+  components: {
+    CommentApp,
+  },
   data() {
     return {
       weekdays: ["日", "月", "火", "水", "木", "金", "土"],
       year: 2021,
       month: 3,
       today: "",
+      commentKinou: false,
     }
   },
   computed: {
@@ -61,6 +66,16 @@ export default {
     },
   },
   methods: {
+    dayNumber2: function () {
+      if (this.commentKinou) {
+        this.commentKinou = false
+        console.log("コメント欄が消えたよ")
+      } else {
+        this.commentKinou = true
+        console.log("コメント欄が出現したよ")
+      }
+    },
+
     lastMonth: function () {
       if (this.month == 1) {
         this.year--

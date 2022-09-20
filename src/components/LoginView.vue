@@ -140,16 +140,16 @@ drawer-open span:before {
   top: 8px;
 }
 
-#drawer-check:checked~.drawer-open span {
+#drawer-check:checked ~ .drawer-open span {
   background: rgba(255, 255, 255, 0);
 }
 
-#drawer-check:checked~.drawer-open span::before {
+#drawer-check:checked ~ .drawer-open span::before {
   bottom: 0;
   transform: rotate(45deg);
 }
 
-#drawer-check:checked~.drawer-open span::after {
+#drawer-check:checked ~ .drawer-open span::after {
   top: 0;
   transform: rotate(-45deg);
 }
@@ -165,7 +165,7 @@ drawer-open span:before {
   transition: 0.5s;
 }
 
-#drawer-check:checked~.drawer-content {
+#drawer-check:checked ~ .drawer-content {
   left: 0;
 }
 

@@ -1,12 +1,7 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |<router-link to="/login"
-        >ログイン</router-link
-      >
-    </nav>
-    <Calendar />
     <Login />
+    <Calendar />
   </div>
 </template>
 <script>

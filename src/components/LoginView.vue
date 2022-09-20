@@ -6,12 +6,10 @@
       <nav class="drawer-content">
         <ul class="drawer-list">
           <li class="drawer-item">
-            <a href="">
-              <nav v-on:click="button">
-                <p v-if="loginAcount">ログイン</p>
-                <p v-else>ログアウト</p>
-              </nav>
-            </a>
+            <nav v-on:click="button">
+              <p v-if="loginAcount">ログイン</p>
+              <p v-else>ログアウト</p>
+            </nav>
           </li>
         </ul>
       </nav>
@@ -30,7 +28,6 @@ import {
 
 export default {
   name: "LoginView",
-
   data() {
     return {
       loginAcount: true,

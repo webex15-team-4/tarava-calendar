@@ -78,24 +78,25 @@
     <br />
 
     <div class="startend4">
-      <button v-on:click="push" class="scheduleButton1">追加</button>
-      <button v-on:click="edit" class="scheduleButton2">編集</button>
-      <button v-on:click="deletes" class="scheduleButton3">削除</button>
+      <button v-on:click="push">追加</button>
+      <button v-on:click="edit">編集</button>
+      <button v-on:click="deletes">削除</button>
     </div>
   </div>
   <div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
         <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
-          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
+          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }}~{{
+            item.lastTime
+          }}:{{ item.lastTime2 }}</span
         >
-        <!-- 一旦コメントアウトしとく削除機能 -->
+        <!-- 一旦コメントアウトしとく削除機能
         <label class="commentItem">
-          <input v-model="comments" />
+          <input v-model="comment.index" />
           <p :class="{ index: item.index }">{{ item.text }}</p>
           <button v-on:click="deleteBtn(commentIndex)">削除</button>
-        </label>
+        </label> -->
       </li>
     </ul>
   </div>
@@ -103,8 +104,6 @@
 <script>
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { db } from "../firebase"
-// 削除ボタンのimportの処理
-import { doc, deleteDoc } from "firebase/firestore"
 
 export default {
   data() {
@@ -198,12 +197,10 @@ export default {
         { id: 11, name: "50" },
         { id: 12, name: "55" },
       ],
-      // 削除ボタンに対するreturn
-      comments: "",
     }
   },
   async created() {
-    const q = query(collection(db, "Schedule"))
+    const q = query(collection(db, "Comment"))
 
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
@@ -239,6 +236,12 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
+
+          // {
+          //   if (this.dateSchedule) {
+          //     this
+          //   }
+          // }
         })
         let item = {
           text: this.inputComment,
@@ -253,7 +256,7 @@ export default {
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
-        await addDoc(collection(db, "Schedule"), item)
+        await addDoc(collection(db, "Comment"), item)
 
         this.inputMemo = ""
       }
@@ -270,12 +273,9 @@ export default {
         console.log("予定作成欄が消えたよ")
       }
     },
-    // 削除ボタンを押したときの処理
-    async deleteBtn(commentIndex) {
-      this.items.splice(commentIndex, 1)
-      console.log("削除できたよ")
-      await deleteDoc(doc(db, "Delete"), this.items)
-    },
+    // deleteBtn(commentIndex) {
+    //   this.items.splice(commentIndex, 1)
+    // },
   },
 }
 //dataプロパティとmethodsプロパティは{},になる
@@ -326,12 +326,6 @@ export default {
   border-width: thick;
   width: 300px;
   radius: 50px;
-}
-.scheduleButton1 {
-  margin-right: 20px;
-}
-.scheduleButton2 {
-  margin-right: 20px;
 }
 .nichizi {
   text-align: center;

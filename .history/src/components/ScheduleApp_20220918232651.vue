@@ -3,17 +3,12 @@
     <button v-on:click="scheduleRan">＋予定</button>
   </div>
   <div v-if="scheduleKinou" class="scheduleKinou">
-    <br />
-    <div class="startend1">
-      予定を追加
+    <div class="inputContainer">
       <input type="text" v-model="inputComment" />
     </div>
-    <br />
 
-    <div class="startend2">
-      <br />
-      <div class="nichizi">日時を選択</div>
-      始まり
+    <div class="startend">
+      日付
       <input type="date" name="date" v-model="selectDate" />
       <option
         v-for="date in optionDate"
@@ -22,6 +17,9 @@
       >
         {{ date.name }}
       </option>
+    </div>
+    <div class="startend">
+      開始
       <select v-model="selectedTime">
         <option disabled value="">Hour</option>
         <option
@@ -43,17 +41,8 @@
         </option>
       </select>
     </div>
-
-    <div class="startend3">
-      終わり
-      <input type="date" name="date" v-model="selectDate2" />
-      <option
-        v-for="date2 in optionDate2"
-        v-bind:value="date2.name"
-        v-bind:key="date2.id"
-      >
-        {{ date2.name }}
-      </option>
+    <div class="startend">
+      終了
       <select v-model="selectedTimeLast">
         <option disabled value="">Hour</option>
         <option
@@ -75,37 +64,25 @@
         </option>
       </select>
     </div>
-    <br />
-
-    <div class="startend4">
-      <button v-on:click="push" class="scheduleButton1">追加</button>
-      <button v-on:click="edit" class="scheduleButton2">編集</button>
-      <button v-on:click="deletes" class="scheduleButton3">削除</button>
+    <div>
+      <button v-on:click="push">追加</button>
+      <button v-on:click="edit">編集</button>
+      <button v-on:click="deletes">削除</button>
     </div>
   </div>
   <div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
         <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
-          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
+          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }}~{{
+            item.lastTime
+          }}:{{ item.lastTime2 }}</span
         >
-        <!-- 一旦コメントアウトしとく削除機能 -->
-        <label class="commentItem">
-          <input v-model="comments" />
-          <p :class="{ index: item.index }">{{ item.text }}</p>
-          <button v-on:click="deleteBtn(commentIndex)">削除</button>
-        </label>
       </li>
     </ul>
   </div>
 </template>
 <script>
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
-import { db } from "../firebase"
-// 削除ボタンのimportの処理
-import { doc, deleteDoc } from "firebase/firestore"
-
 export default {
   data() {
     return {
@@ -198,26 +175,7 @@ export default {
         { id: 11, name: "50" },
         { id: 12, name: "55" },
       ],
-      // 削除ボタンに対するreturn
-      comments: "",
     }
-  },
-  async created() {
-    const q = query(collection(db, "Schedule"))
-
-    const querySnapshot = await getDocs(q)
-    console.log(querySnapshot)
-    querySnapshot.forEach((doc) => {
-      this.items.push({
-        text: doc.data().text,
-        date: doc.data().date,
-        time: doc.data().time,
-        time2: doc.data().time2,
-        date2: doc.data().date2,
-        lastTime: doc.data().lastTime,
-        lastTime2: doc.data().lastTime2,
-      })
-    })
   },
   methods: {
     scheduleRan: function () {
@@ -229,52 +187,47 @@ export default {
         console.log("予定作成欄が出現したよ")
       }
     },
-    async push() {
+    push() {
       if (this.inputComment !== "") {
         this.items.push({
           text: this.inputComment,
           date: this.selectDate,
+          // {
+          //   if (this.dateSchedule) {
+          //     this
+          //   }
+          // }
           time: this.selectedTime,
           time2: this.selectedTime2,
-          date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
         })
-        let item = {
-          text: this.inputComment,
-          date: this.selectDate,
-          time: this.selectedTime,
-          time2: this.selectedTime2,
-          date2: this.selectDate2,
-          lastTime: this.selectedTimeLast,
-          lastTime2: this.selectedTimeLast2,
-        }
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)
-        console.log("追加できてるよ")
-        await addDoc(collection(db, "Schedule"), item)
-
-        this.inputMemo = ""
       }
     },
     edit() {
       if (this.inputComment !== "") {
+        this.items.push({
+          text: this.inputComment,
+          data: this.selectDate,
+          time: this.selectedTime,
+          lastTime: this.selectedTimeLast,
+        })
         this.inputComment = ""
-      } else this.inputComment === "", {}
-      this.inputComment = ""
-    },
-    deletes: function () {
-      if (this.scheduleKinou) {
-        this.scheduleKinou = false
-        console.log("予定作成欄が消えたよ")
+        console.log(this.inputComment)
+        console.log(this.items)
       }
     },
-    // 削除ボタンを押したときの処理
-    async deleteBtn(commentIndex) {
-      this.items.splice(commentIndex, 1)
-      console.log("削除できたよ")
-      await deleteDoc(doc(db, "Delete"), this.items)
+    deletes() {
+      if (this.inputComment !== "") {
+        this.inputComment = ""
+      }
+      //  else (this.inputComment === ""), {
+      //   this.inputComment = ""
+      // }
+      // this.inputComment = ""
     },
   },
 }
@@ -283,57 +236,17 @@ export default {
 //key: value,のオブジェクト
 </script>
 <style>
-.schedule {
-  display: flex;
-  justify-content: flex-end;
-}
+/* .schedule {
+  min-width: 100px;
+  min-height: 100px;
+} */
 .startend {
 }
 .scheduleKinou {
   border-top-style: double;
+  width: 300px;
   border-bottom-style: double;
   border-right-style: double;
   border-left-style: double;
-  border-color: #faa9b6;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-width: thick;
-  width: 300px;
-  background-color: #fed4db;
-  border-radius: 20px;
-  /* height: 200px; */
-}
-.startend1 {
-}
-.startend2 {
-  border-top-style: double;
-  border-color: #faa9b6;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-width: thick;
-  width: 300px;
-}
-.startend3 {
-}
-.startend4 {
-  border-top-style: double;
-  border-color: #faa9b6;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-width: thick;
-  width: 300px;
-  radius: 50px;
-}
-.scheduleButton1 {
-  margin-right: 20px;
-}
-.scheduleButton2 {
-  margin-right: 20px;
-}
-.nichizi {
-  text-align: center;
 }
 </style>

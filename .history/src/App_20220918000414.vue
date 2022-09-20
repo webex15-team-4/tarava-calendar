@@ -8,8 +8,9 @@
   <!-- <router-view /> -->
   <!-- <CommentApp /> -->
   <Login />
-  <Calendar />
   <ScheduleApp />
+  <Calendar />
+
   <!-- <KUziApp /> -->
 </template>
 

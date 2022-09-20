@@ -10,9 +10,19 @@
     </div>
     <br />
 
+    <!-- <div class="startend">
+      日付
+      <input type="date" name="date" v-model="selectDate" />
+      <option
+        v-for="date in optionDate"
+        v-bind:value="date.name"
+        v-bind:key="date.id"
+      >
+        {{ date.name }}
+      </option>
+    </div> -->
+    <div class="nichizi">日時を選択</div>
     <div class="startend2">
-      <br />
-      <div class="nichizi">日時を選択</div>
       始まり
       <input type="date" name="date" v-model="selectDate" />
       <option
@@ -76,36 +86,32 @@
       </select>
     </div>
     <br />
-
+    <br />
     <div class="startend4">
-      <button v-on:click="push" class="scheduleButton1">追加</button>
-      <button v-on:click="edit" class="scheduleButton2">編集</button>
-      <button v-on:click="deletes" class="scheduleButton3">削除</button>
+      <button v-on:click="push">追加</button>
+      <button v-on:click="edit">編集</button>
+      <button v-on:click="deletes">削除</button>
     </div>
   </div>
   <div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
         <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
-          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
+          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }}~{{
+            item.lastTime
+          }}:{{ item.lastTime2 }}</span
         >
-        <!-- 一旦コメントアウトしとく削除機能 -->
+        <!-- 一旦コメントアウトしとく削除機能
         <label class="commentItem">
-          <input v-model="comments" />
+          <input v-model="comment.index" />
           <p :class="{ index: item.index }">{{ item.text }}</p>
           <button v-on:click="deleteBtn(commentIndex)">削除</button>
-        </label>
+        </label> -->
       </li>
     </ul>
   </div>
 </template>
 <script>
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
-import { db } from "../firebase"
-// 削除ボタンのimportの処理
-import { doc, deleteDoc } from "firebase/firestore"
-
 export default {
   data() {
     return {
@@ -198,26 +204,7 @@ export default {
         { id: 11, name: "50" },
         { id: 12, name: "55" },
       ],
-      // 削除ボタンに対するreturn
-      comments: "",
     }
-  },
-  async created() {
-    const q = query(collection(db, "Schedule"))
-
-    const querySnapshot = await getDocs(q)
-    console.log(querySnapshot)
-    querySnapshot.forEach((doc) => {
-      this.items.push({
-        text: doc.data().text,
-        date: doc.data().date,
-        time: doc.data().time,
-        time2: doc.data().time2,
-        date2: doc.data().date2,
-        lastTime: doc.data().lastTime,
-        lastTime2: doc.data().lastTime2,
-      })
-    })
   },
   methods: {
     scheduleRan: function () {
@@ -229,33 +216,25 @@ export default {
         console.log("予定作成欄が出現したよ")
       }
     },
-    async push() {
+    push() {
       if (this.inputComment !== "") {
         this.items.push({
           text: this.inputComment,
           date: this.selectDate,
+          // {
+          //   if (this.dateSchedule) {
+          //     this
+          //   }
+          // }
           time: this.selectedTime,
           time2: this.selectedTime2,
-          date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
         })
-        let item = {
-          text: this.inputComment,
-          date: this.selectDate,
-          time: this.selectedTime,
-          time2: this.selectedTime2,
-          date2: this.selectDate2,
-          lastTime: this.selectedTimeLast,
-          lastTime2: this.selectedTimeLast2,
-        }
         this.inputComment = ""
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
-        await addDoc(collection(db, "Schedule"), item)
-
-        this.inputMemo = ""
       }
     },
     edit() {
@@ -270,12 +249,9 @@ export default {
         console.log("予定作成欄が消えたよ")
       }
     },
-    // 削除ボタンを押したときの処理
-    async deleteBtn(commentIndex) {
-      this.items.splice(commentIndex, 1)
-      console.log("削除できたよ")
-      await deleteDoc(doc(db, "Delete"), this.items)
-    },
+    // deleteBtn(commentIndex) {
+    //   this.items.splice(commentIndex, 1)
+    // },
   },
 }
 //dataプロパティとmethodsプロパティは{},になる
@@ -283,10 +259,10 @@ export default {
 //key: value,のオブジェクト
 </script>
 <style>
-.schedule {
-  display: flex;
-  justify-content: flex-end;
-}
+/* .schedule {
+  min-width: 100px;
+  min-height: 100px;
+} */
 .startend {
 }
 .scheduleKinou {
@@ -294,21 +270,19 @@ export default {
   border-bottom-style: double;
   border-right-style: double;
   border-left-style: double;
-  border-color: #faa9b6;
+  border-color: red;
   display: block;
   margin-left: auto;
   margin-right: auto;
   border-width: thick;
   width: 300px;
-  background-color: #fed4db;
-  border-radius: 20px;
   /* height: 200px; */
 }
 .startend1 {
 }
 .startend2 {
   border-top-style: double;
-  border-color: #faa9b6;
+  border-color: red;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -316,22 +290,23 @@ export default {
   width: 300px;
 }
 .startend3 {
-}
-.startend4 {
-  border-top-style: double;
-  border-color: #faa9b6;
+  border-bottom-style: double;
+  border-color: red;
   display: block;
   margin-left: auto;
   margin-right: auto;
   border-width: thick;
   width: 300px;
-  radius: 50px;
 }
-.scheduleButton1 {
-  margin-right: 20px;
-}
-.scheduleButton2 {
-  margin-right: 20px;
+.startend4 {
+  border-top-style: double;
+  border-color: red;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: thick;
+  width: 300px;
+  letter-spacing: 10px;
 }
 .nichizi {
   text-align: center;

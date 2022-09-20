@@ -78,9 +78,9 @@
     <br />
 
     <div class="startend4">
-      <button v-on:click="push" class="scheduleButton1">追加</button>
-      <button v-on:click="edit" class="scheduleButton2">編集</button>
-      <button v-on:click="deletes" class="scheduleButton3">削除</button>
+      <button v-on:click="push">追加</button>
+      <button v-on:click="edit">編集</button>
+      <button v-on:click="deletes">削除</button>
     </div>
   </div>
   <div>
@@ -326,12 +326,6 @@ export default {
   border-width: thick;
   width: 300px;
   radius: 50px;
-}
-.scheduleButton1 {
-  margin-right: 20px;
-}
-.scheduleButton2 {
-  margin-right: 20px;
 }
 .nichizi {
   text-align: center;

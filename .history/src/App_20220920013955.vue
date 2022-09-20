@@ -9,20 +9,20 @@
   <!-- <CommentApp /> -->
   <Login />
   <Calendar />
-  <ScheduleApp />
+  <!-- <ScheduleApp /> -->
   <!-- <KUziApp /> -->
 </template>
 
 <script>
 // import CommentApp from "./components/CommentApp.vue"
-import ScheduleApp from "@/components/ScheduleApp.vue"
+// import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
 import Login from "@/components/LoginView.vue"
 // import KUziApp from "@/components/KUziApp.vue"
 export default {
   components: {
     // CommentApp,
-    ScheduleApp,
+    // ScheduleApp,
     Calendar,
     Login,
     // KUziApp,

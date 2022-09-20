@@ -328,10 +328,10 @@ export default {
   radius: 50px;
 }
 .scheduleButton1 {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .scheduleButton2 {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .nichizi {
   text-align: center;

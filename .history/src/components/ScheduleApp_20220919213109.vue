@@ -78,9 +78,9 @@
     <br />
 
     <div class="startend4">
-      <button v-on:click="push" class="scheduleButton1">追加</button>
-      <button v-on:click="edit" class="scheduleButton2">編集</button>
-      <button v-on:click="deletes" class="scheduleButton3">削除</button>
+      <button v-on:click="push">追加</button>
+      <button v-on:click="edit">編集</button>
+      <button v-on:click="deletes">削除</button>
     </div>
   </div>
   <div>
@@ -91,11 +91,11 @@
           {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
         >
         <!-- 一旦コメントアウトしとく削除機能 -->
-        <label class="commentItem">
+        <!-- <label class="commentItem">
           <input v-model="comments" />
           <p :class="{ index: item.index }">{{ item.text }}</p>
           <button v-on:click="deleteBtn(commentIndex)">削除</button>
-        </label>
+        </label> -->
       </li>
     </ul>
   </div>
@@ -103,8 +103,6 @@
 <script>
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { db } from "../firebase"
-// 削除ボタンのimportの処理
-import { doc, deleteDoc } from "firebase/firestore"
 
 export default {
   data() {
@@ -199,7 +197,7 @@ export default {
         { id: 12, name: "55" },
       ],
       // 削除ボタンに対するreturn
-      comments: "",
+      // comments: "",
     }
   },
   async created() {
@@ -271,11 +269,10 @@ export default {
       }
     },
     // 削除ボタンを押したときの処理
-    async deleteBtn(commentIndex) {
-      this.items.splice(commentIndex, 1)
-      console.log("削除できたよ")
-      await deleteDoc(doc(db, "Delete"), this.items)
-    },
+    // deleteBtn(commentIndex) {
+    //   this.items.splice(commentIndex, 1)
+    //   console.log("削除できたよ")
+    // },
   },
 }
 //dataプロパティとmethodsプロパティは{},になる
@@ -326,12 +323,6 @@ export default {
   border-width: thick;
   width: 300px;
   radius: 50px;
-}
-.scheduleButton1 {
-  margin-right: 20px;
-}
-.scheduleButton2 {
-  margin-right: 20px;
 }
 .nichizi {
   text-align: center;

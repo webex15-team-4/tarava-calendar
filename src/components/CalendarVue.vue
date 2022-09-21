@@ -110,9 +110,10 @@
       </select>
       <!-- 112～169行目 さえちゃんの色機能のとこ -->
       <!-- ボタンを押したら色機能を表示 -->
-      <div v-if="isVisible">
-        <button v-on:click="irokinou">背景色を変更</button>
-      </div>
+      <div style="align-content: center"></div>
+      <div class="showColor" v-bind:style="selectedColor"></div>
+      <button v-on:click="irokinou">背景色を変更</button>
+
       <!-- 予定の背景の色を変化...クリックした色を表示させる
     <div class="output" :style="bgColor"></div> -->
 
@@ -133,21 +134,18 @@
     <br />
 
     <div class="startend4">
-      <button v-on:click="push" class="scheduleButton1">追加</button>
+      <button v-on:click="commentpush" class="scheduleButton1">追加</button>
       <button v-on:click="edit" class="scheduleButton2">編集</button>
       <button v-on:click="deletes" class="scheduleButton3">削除</button>
     </div>
   </div>
   <div>
     <ul>
-      <li v-for="(item, index) in items" :key="index">
-        <!--さえちゃんの色機能のとこ  -->
-      </li>
-      <li v-for="(item, index) in items" :key="index" :style="bgColor">
-        <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
-          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
-        >
+      <li v-for="item in items" :key="item">
+        <div v-bind:style="item.color">
+          {{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
+          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}
+        </div>
         <!-- 一旦コメントアウトしとく削除機能 -->
         <!-- <label class="commentItem">
           <input v-model="comments" />
@@ -317,100 +315,140 @@ export default {
           colorid: "color1",
           cl: "linear-gradient(to right, rgb(233, 37, 37))",
         },
-        { id: 1, colorid: "color2", cl: "linear-gradient(to right, #ff007f)" },
-        { id: 2, colorid: "color3", cl: "linear-gradient(to right, #ff00ff)" },
-        { id: 3, colorid: "color4", cl: "linear-gradient(to right, #7f00ff)" },
-        { id: 4, colorid: "color5", cl: "linear-gradient(to right, purple)" },
-        { id: 5, colorid: "color6", cl: "linear-gradient(to right, #0000ff)" },
-        { id: 6, colorid: "color7", cl: "linear-gradient(to right, #00ffff)" },
-        { id: 7, colorid: "color8", cl: "linear-gradient(to right, #007fff)" },
-        { id: 8, colorid: "color9", cl: "linear-gradient(to right, #00ff7f)" },
-        { id: 9, colorid: "color10", cl: "linear-gradient(to right, #00ff00)" },
+        {
+          id: 1,
+          colorid: "color2",
+          cl: "linear-gradient(to right, #ff007f, #ff007f)",
+        },
+        {
+          id: 2,
+          colorid: "color3",
+          cl: "linear-gradient(to right, #ff00ff, #ff00ff)",
+        },
+        {
+          id: 3,
+          colorid: "color4",
+          cl: "linear-gradient(to right, #7f00ff, #7f00ff)",
+        },
+        {
+          id: 4,
+          colorid: "color5",
+          cl: "linear-gradient(to right, purple, purple)",
+        },
+        {
+          id: 5,
+          colorid: "color6",
+          cl: "linear-gradient(to right, #0000ff, #0000ff)",
+        },
+        {
+          id: 6,
+          colorid: "color7",
+          cl: "linear-gradient(to right, #00ffff, #00ffff)",
+        },
+        {
+          id: 7,
+          colorid: "color8",
+          cl: "linear-gradient(to right, #007fff, #007fff)",
+        },
+        {
+          id: 8,
+          colorid: "color9",
+          cl: "linear-gradient(to right, #00ff7f, #00ff7f)",
+        },
+        {
+          id: 9,
+          colorid: "color10",
+          cl: "linear-gradient(to right, #00ff00, #00ff00)",
+        },
         {
           id: 10,
           colorid: "color11",
-          cl: "linear-gradient(to right, greenyellow)",
+          cl: "linear-gradient(to right, greenyellow, greenyellow)",
         },
         {
           id: 11,
           colorid: "color12",
-          cl: "linear-gradient(to right, #ffff00)",
+          cl: "linear-gradient(to right, #ffff00, #ffff00)",
         },
         {
           id: 12,
           colorid: "color13",
-          cl: "linear-gradient(to right, #ff7f00)",
+          cl: "linear-gradient(to right, #ff7f00, #ff7f00)",
         },
         {
           id: 13,
           colorid: "color14",
-          cl: "linear-gradient(to right, rgb(56, 56, 56))",
+          cl: "linear-gradient(to right, rgb(56, 56, 56, rgb(56, 56, 56))",
         },
         {
           id: 14,
           colorid: "Pcolor1",
-          cl: "linear-gradient(to right, #ff7f7f)",
+          cl: "linear-gradient(to right, #ff7f7f, #ff7f7f)",
         },
         {
           id: 15,
           colorid: "Pcolor2",
-          cl: "linear-gradient(to right, #ff7fbf)",
+          cl: "linear-gradient(to right, #ff7fbf, #ff7fbf)",
         },
         {
           id: 16,
           colorid: "Pcolor3",
-          cl: "linear-gradient(to right, #ff7fff)",
+          cl: "linear-gradient(to right, #ff7fff, #ff7fff)",
         },
         {
           id: 17,
           colorid: "Pcolor4",
-          cl: "linear-gradient(to right, #bf7fff)",
+          cl: "linear-gradient(to right, #bf7fff, #bf7fff)",
         },
-        { id: 18, colorid: "Pcolor5", cl: "linear-gradient(to right, #7f7fff" },
+        {
+          id: 18,
+          colorid: "Pcolor5",
+          cl: "linear-gradient(to right, #7f7fff, #7f7fff",
+        },
         {
           id: 19,
           colorid: "Pcolor6",
-          cl: "linear-gradient(to right, #7fbfff)",
+          cl: "linear-gradient(to right, #7fbfff, #7fbfff)",
         },
         {
           id: 20,
           colorid: "Pcolor7",
-          cl: "linear-gradient(to right, #7fffff)",
+          cl: "linear-gradient(to right, #7fffff, #7fffff)",
         },
         {
           id: 21,
           colorid: "Pcolor8",
-          cl: "linear-gradient(to right, #84ffc1)",
+          cl: "linear-gradient(to right, #84ffc1, #84ffc1)",
         },
         {
           id: 22,
           colorid: "Pcolor9",
-          cl: "linear-gradient(to right, #7fff7f)",
+          cl: "linear-gradient(to right, #7fff7f, #7fff7f)",
         },
         {
           id: 23,
           colorid: "Pcolor10",
-          cl: "linear-gradient(to right, #bfff7f)",
+          cl: "linear-gradient(to right, #bfff7f, #bfff7f)",
         },
         {
           id: 24,
           colorid: "Pcolor11",
-          cl: "linear-gradient(to right, #ffff6f)",
+          cl: "linear-gradient(to right, #ffff6f, #ffff6f)",
         },
         {
           id: 25,
           colorid: "Pcolor12",
-          cl: "linear-gradient(to right, #ffbf7f)",
+          cl: "linear-gradient(to right, #ffbf7f, #ffbf7f)",
         },
         {
           id: 26,
           colorid: "Pcolor13",
-          cl: "linear-gradient(to right, #dbf594)",
+          cl: "linear-gradient(to right, #dbf594, #dbf594)",
         },
         {
           id: 27,
           colorid: "Pcolor14",
-          cl: "linear-gradient(to right, #878484a7)",
+          cl: "linear-gradient(to right, #878484a7, #878484a7)",
         },
         {
           id: 28,
@@ -553,6 +591,7 @@ export default {
           cl: "linear-gradient(to right, #4158d0, #c850c0, #ffcc70)",
         },
       ],
+      selectedColor: {},
 
       // 削除ボタンに対するreturn
       // comments: "",
@@ -583,7 +622,7 @@ export default {
   },
   // 119～128行目 ほんまっちとあわせるところ（コメント機能と予定作成機能）
   async created() {
-    const q = query(collection(db, "Comment"))
+    const q = query(collection(db, "Schedule"))
 
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
@@ -596,8 +635,11 @@ export default {
         date2: doc.data().date2,
         lastTime: doc.data().lastTime,
         lastTime2: doc.data().lastTime2,
+        color: doc.data().color,
       })
     })
+    console.log(this.items)
+    console.log(typeof this.items)
   },
   methods: {
     lastMonth: function () {
@@ -644,48 +686,18 @@ export default {
         console.log("色機能が表示された")
       }
     },
+    //ここを統一インターフェーズ
     colorBtn(colorId) {
       const targetColorIndex = this.colors.findIndex(
         (color) => color.id === colorId
       )
       console.log(targetColorIndex)
       this.bgColor.backgroundImage = this.colors[targetColorIndex].cl
+      this.selectedColor = this.bgColor
     },
-    //ここを統一インターフェーズ
-    // defaultColorBtn(defaultColorId) {
-    //   const targetDefaultColorIndex = this.defaultColors.findIndex(
-    //     (defaultColor) => defaultColor.id === defaultColorId
-    //   )
-    //   console.log(targetDefaultColorIndex)
-    //   this.bgColor.backgroundColor =
-    //     this.defaultColors[targetDefaultColorIndex].cl
-    // },
-    // pastelColorBtn(pastelColorid) {
-    //   const targetPasteltColorIndex = this.pastelColors.findIndex(
-    //     (pastelColor) => pastelColor.id === pastelColorid
-    //   )
-    //   console.log(targetPasteltColorIndex)
-    //   this.bgColor.backgroundColor =
-    //     this.pastelColors[targetPasteltColorIndex].cl
-    // },
-    // gradationColorBtn(gradationColorid) {
-    //   const targetGradationColorIndex = this.gradationColors.findIndex(
-    //     (gradationColor) => gradationColor.id === gradationColorid
-    //   )
-    //   console.log(targetGradationColorIndex)
-    //   this.bgColor.backgroundImage =
-    //     this.gradationColors[targetGradationColorIndex].cl
-    // },
-    // mixColorBtn(mixColorId) {
-    //   const targetMixColorIndex = this.mixColors.findIndex(
-    //     (mixcolor) => mixcolor.id === mixColorId
-    //   )
-    //   console.log(targetMixColorIndex)
-    //   this.bgColor.backgroundImage = this.mixColors[targetMixColorIndex].cl
-    // },
-    async push() {
+    async commentpush() {
       if (this.inputComment !== "") {
-        this.items.push({
+        const item = {
           text: this.inputComment,
           date: this.selectDate,
           time: this.selectedTime,
@@ -693,30 +705,24 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
-        })
-        let item = {
-          text: this.inputComment,
-          date: this.selectDate,
-          time: this.selectedTime,
-          time2: this.selectedTime2,
-          date2: this.selectDate2,
-          lastTime: this.selectedTimeLast,
-          lastTime2: this.selectedTimeLast2,
+          color: this.selectedColor,
         }
-        this.inputComment = ""
+        this.items.push(item)
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
         await addDoc(collection(db, "Schedule"), item)
 
+        this.inputComment = ""
         this.inputMemo = ""
       }
     },
     edit() {
       if (this.inputComment !== "") {
         this.inputComment = ""
-      } else this.inputComment === "", {}
-      this.inputComment = ""
+      } else {
+        this.inputComment = ""
+      }
     },
     deletes: function () {
       if (this.scheduleKinou) {
@@ -946,42 +952,6 @@ td {
   width: 300px;
   justify-content: space-between;
 }
-
-/* .DefaultPalette {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 300px;
-  margin: 3%;
-  justify-content: space-between;
-}
-
-.PastelPalette {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 300px;
-  margin: 3%;
-  justify-content: space-between;
-}
-
-.GradationColor {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 300px;
-  margin: 3%;
-  justify-content: space-between;
-}
-
-.MixColor {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 300px;
-  margin: 3%;
-  justify-content: space-between;
-} */
 
 .Palette {
   display: flex;
@@ -1391,5 +1361,12 @@ td {
   height: 40px;
   background-image: linear-gradient(to right, #4158d0, #c850c0, #ffcc70);
   border-radius: 50% 50% 0 50%;
+}
+
+.showColor {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 0 50%;
+  margin: auto;
 }
 </style>

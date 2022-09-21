@@ -466,10 +466,6 @@ export default {
         date2: doc.data().date2,
         lastTime: doc.data().lastTime,
         lastTime2: doc.data().lastTime2,
-        defaultColor: doc.data().defaultColor,
-        pastelColor: doc.data().pastelColor,
-        gradationColor: doc.data().gradationColor,
-        mixColor: doc.data().mixColor,
       })
       this
       // defaultColor: doc.data().defaultColor,
@@ -537,10 +533,8 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
+          // defaultColor: this.DefaultPalette,
           defaultColor: this.bgColor,
-          pastelColor: this.bgColor,
-          gradationColor: this.bgColor,
-          mixColor: this.bgColor,
         })
         let item = {
           text: this.inputComment,
@@ -550,13 +544,9 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
-          defaultColor: this.bgColor,
-          pastelColor: this.bgColor,
-          gradationColor: this.bgColor,
-          mixColor: this.bgColor,
+          // defaultColor: this.DefaultPalette,
         }
         this.inputComment = ""
-        // this.bgColor = ""
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
@@ -564,27 +554,7 @@ export default {
 
         this.inputMemo = ""
       }
-      if (this.bgColor !== "") {
-        this.defaultColors.push({
-          defaultColor: this.bgColor,
-          // pastelColor: this.bgColor,
-          // gradationColor: this.bgColor,
-          // mixColor: this.bgColor,
-        })
-        let defaultColor = {
-          defaultColor: this.bgColor,
-        }
-
-        this.bgColor = ""
-        // console.log(this.inputComment)
-        console.log(this.defaultColors)
-        console.log("追加できてる")
-        await addDoc(collection(db, "Schedule"), defaultColor)
-
-        // this.inputMemo = ""
-      }
     },
-
     edit() {
       if (this.inputComment !== "") {
         this.inputComment = ""
@@ -614,10 +584,6 @@ export default {
         date2: deleteField(),
         lastTime: deleteField(),
         lastTime2: deleteField(),
-        defaultColor: deleteField(),
-        pastelColor: deleteField(),
-        gradationColor: deleteField(),
-        mixColor: deleteField(),
       })
     },
   },

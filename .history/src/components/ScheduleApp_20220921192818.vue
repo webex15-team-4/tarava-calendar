@@ -564,6 +564,8 @@ export default {
 
         this.inputMemo = ""
       }
+    },
+    async push() {
       if (this.bgColor !== "") {
         this.defaultColors.push({
           defaultColor: this.bgColor,
@@ -578,13 +580,12 @@ export default {
         this.bgColor = ""
         // console.log(this.inputComment)
         console.log(this.defaultColors)
-        console.log("追加できてる")
+        console.log("追加できてるよ")
         await addDoc(collection(db, "Schedule"), defaultColor)
 
         // this.inputMemo = ""
       }
     },
-
     edit() {
       if (this.inputComment !== "") {
         this.inputComment = ""

@@ -556,7 +556,7 @@ export default {
           mixColor: this.bgColor,
         }
         this.inputComment = ""
-        // this.bgColor = ""
+        this.bgColor = ""
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
@@ -564,27 +564,7 @@ export default {
 
         this.inputMemo = ""
       }
-      if (this.bgColor !== "") {
-        this.defaultColors.push({
-          defaultColor: this.bgColor,
-          // pastelColor: this.bgColor,
-          // gradationColor: this.bgColor,
-          // mixColor: this.bgColor,
-        })
-        let defaultColor = {
-          defaultColor: this.bgColor,
-        }
-
-        this.bgColor = ""
-        // console.log(this.inputComment)
-        console.log(this.defaultColors)
-        console.log("追加できてる")
-        await addDoc(collection(db, "Schedule"), defaultColor)
-
-        // this.inputMemo = ""
-      }
     },
-
     edit() {
       if (this.inputComment !== "") {
         this.inputComment = ""

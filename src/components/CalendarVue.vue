@@ -110,7 +110,6 @@
       </select>
       <!-- 112～169行目 さえちゃんの色機能のとこ -->
       <!-- ボタンを押したら色機能を表示 -->
-      <div style="align-content: center"></div>
       <div class="showColor" v-bind:style="selectedColor"></div>
       <button v-on:click="irokinou">背景色を変更</button>
 
@@ -142,7 +141,7 @@
   <div>
     <ul>
       <li v-for="item in items" :key="item">
-        <div v-bind:style="item.color">
+        <div :style="item.color">
           {{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
           {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}
         </div>

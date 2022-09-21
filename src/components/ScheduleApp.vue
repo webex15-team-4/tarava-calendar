@@ -10,9 +10,8 @@
     <ul>
       <li v-for="(item, index) in items" :key="index" :style="bgColor">
         <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}~{{
-            item.lastTime
-          }}</span
+          >{{ item.text }} {{ item.date }} {{ item.time }}~{{ item.lastTime }}
+          {{ item.done }}</span
         >
       </li>
     </ul>
@@ -127,7 +126,7 @@ export default {
         { id: 3, name: "2:00" },
       ],
       isVisible: true,
-      colorArea: true,
+      colorArea: false,
       defaultColors: [
         { id: 0, colorid: "color1", cl: "rgb(233, 37, 37)" },
         { id: 1, colorid: "color2", cl: "#ff007f" },
@@ -543,7 +542,7 @@ export default {
 .color14 {
   width: 40px;
   height: 40px;
-  background-color: rgb(56, 56, 56);
+  background-color: rgb(128, 126, 126);
   border-radius: 50% 50% 0 50%;
 }
 

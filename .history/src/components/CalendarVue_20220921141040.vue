@@ -118,7 +118,7 @@
 
       <!-- Paletteを作る -->
       <!-- デフォルトカラー14色 -->
-      <section v-if="colorArea" class="color">
+      <section v-if="colorArea">
         <div class="DefaultPalette">
           <div
             v-for="(defaultColor, defaultColorIndex) in defaultColors"
@@ -917,10 +917,6 @@ td {
   justify-content: space-between;
 }
 /* デフォルトカラー */
-.color {
-  position: relative;
-  right: 9px;
-}
 .color1 {
   width: 40px;
   height: 40px;

@@ -556,7 +556,7 @@ export default {
     const q = query(collection(db, "Comment"))
 
     const querySnapshot = await getDocs(q)
-    console.log(querySnapshot)
+    // console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
       this.items.push({
         text: doc.data().text,

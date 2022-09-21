@@ -1,38 +1,4 @@
 <template>
-  <div class="calendar">
-    <div class="calender2">
-      <div id="header">
-        <span class="header-arrow" v-on:click="lastMonth">＜</span>
-        <span class="selected-month">{{ year }}年{{ month }}月</span>
-        <span class="header-arrow" v-on:click="nextMonth">＞</span>
-      </div>
-      <div>
-        <table id="main">
-          <thead>
-            <th v-for="(dayName, dayIndex) in weekdays" :key="dayIndex">
-              {{ dayName }}
-            </th>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(weekData, weekDataIndex) in calendar"
-              :key="weekDataIndex"
-            >
-              <td
-                v-for="(dayNumber, dayNumberIndex) in weekData"
-                :key="dayNumberIndex"
-                :class="{ today: isToday(dayNumber) }"
-              >
-                <!-- 27行目 ほんまっちとあわせるところ -->
-                <span v-on:click="commentRan">{{ dayNumber }}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <!-- ほんまっちとあわせるところ（予定作成機能） -->
   <div class="schedule">
     <button v-on:click="scheduleRan">＋予定</button>
   </div>
@@ -108,7 +74,7 @@
           {{ lastTime2.name }}
         </option>
       </select>
-      <!-- 112～169行目 さえちゃんの色機能のとこ -->
+      <!-- 78～134行目 さえちゃんの色機能のとこ -->
       <!-- ボタンを押したら色機能を表示 -->
       <div v-if="isVisible">
         <button v-on:click="irokinou">背景色を変更</button>
@@ -118,7 +84,7 @@
 
       <!-- Paletteを作る -->
       <!-- デフォルトカラー14色 -->
-      <section v-if="colorArea" class="color">
+      <section v-if="colorArea">
         <div class="DefaultPalette">
           <div
             v-for="(defaultColor, defaultColorIndex) in defaultColors"
@@ -177,83 +143,34 @@
   </div>
   <div>
     <ul>
-      <li v-for="(item, index) in items" :key="index">
-        <!--さえちゃんの色機能のとこ  -->
-      </li>
+      <!-- <li v-for="(item, index) in items" :key="index"> -->
+      <!--さえちゃんの色機能のとこ  -->
+      <!-- </li> -->
       <li v-for="(item, index) in items" :key="index" :style="bgColor">
-        <span
-          >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
-          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
-        >
-        <!-- 一旦コメントアウトしとく削除機能 -->
-        <!-- <label class="commentItem">
-          <input v-model="comments" />
-          <p :class="{ index: item.index }">{{ item.text }}</p>
-          <button v-on:click="deleteBtn(commentIndex)">削除</button>
-        </label> -->
-      </li>
-    </ul>
-  </div>
-  <!-- 36～69行目 ほんまっちとあわせるところ（コメント機能） -->
-  <div v-if="commentKinou" class="calender2">
-    <div class="commentRan">
-      <br />
-      <textarea
-        v-model="inputComment"
-        @keydown.enter.shift.exact="keyDownEnterShift"
-        class="textarea"
-      />
-
-      <!-- ↑あえて書いてた\nの明示化を外した -->
-      <div class="commentButton">
-        <br />
-        <button v-on:click="comment(commentAreaId)">コメント</button>
-        <button v-on:click="cancel">キャンセル</button>
-        <!-- 50行目 必要かわからない処理 -->
-        <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
-      </div>
-    </div>
-
-    <ul v-if="commentAreaId !== null">
-      <li
-        class="show_return"
-        v-for="(item, commentIndex) in containers[commentAreaId].items"
-        :key="commentIndex"
-        style="list-style-type: none"
-      >
         <label class="commentItem">
-          <input v-model="comment.done" />
-          <p :class="{ done: item.done }">{{ item.text }}</p>
-          <button v-on:click="deleteBtn(commentIndex)">削除</button>
+          <span
+            >{{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
+            {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}</span
+          >
+          <!-- 一旦コメントアウトしとく削除機能 -->
+          <button v-on:click="deleteBtn(index)">削除</button>
         </label>
       </li>
     </ul>
   </div>
 </template>
-
 <script>
-// 73～74行目 ほんまっちとあわせるところ(コメント機能と予定作成機能)
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { db } from "../firebase"
+// 削除ボタンのimportの処理
+// import { doc, deleteDoc } from "firebase/firestore"
+import { doc, updateDoc, deleteField } from "firebase/firestore"
 
 export default {
   data() {
     return {
-      weekdays: ["日", "月", "火", "水", "木", "金", "土"],
-      year: 2021,
-      month: 3,
-      today: "",
-      // 84～92行目 ほんまっちとあわせるところ（コメント機能）
       inputComment: "",
       items: [],
-      commentKinou: false,
-      containers: [
-        { id: 0, text: "１", items: [] },
-        { id: 1, text: "２", items: [] },
-        { id: 2, text: "３", items: [] },
-      ],
-      commentAreaId: null,
-      // ほんまっちとあわせるところ（予定作成機能）
       scheduleKinou: false,
       selectDate: "",
       // dateSchedule: false,
@@ -341,7 +258,7 @@ export default {
         { id: 11, name: "50" },
         { id: 12, name: "55" },
       ],
-      // 345～528行目 さえちゃんの色機能のとこ
+      // 263～444行目 さえちゃんの色機能のとこ
       isVisible: true,
       colorArea: true,
       defaultColors: [
@@ -525,35 +442,11 @@ export default {
         backgroundImage: "",
       },
       // 削除ボタンに対するreturn
-      // comments: "",
+      comments: "",
     }
   },
-  computed: {
-    calendar: function () {
-      let calendar = []
-      let firstWeekDay = new Date(this.year, this.month - 1, 1).getDay()
-      let lastDay = new Date(this.year, this.month, 0).getDate()
-      let dayNumber = 1
-      while (dayNumber <= lastDay) {
-        let weekData = []
-        for (let i = 0; i <= 6; i++) {
-          if (calendar.length == 0 && i < firstWeekDay) {
-            weekData[i] = ""
-          } else if (lastDay < dayNumber) {
-            weekData[i] = ""
-          } else {
-            weekData[i] = dayNumber
-            dayNumber++
-          }
-        }
-        calendar.push(weekData)
-      }
-      return calendar
-    },
-  },
-  // 119～128行目 ほんまっちとあわせるところ（コメント機能と予定作成機能）
   async created() {
-    const q = query(collection(db, "Comment"))
+    const q = query(collection(db, "Schedule"))
 
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
@@ -570,31 +463,6 @@ export default {
     })
   },
   methods: {
-    lastMonth: function () {
-      if (this.month == 1) {
-        this.year--
-        this.month = 12
-      } else {
-        this.month--
-      }
-    },
-    nextMonth: function () {
-      if (this.month == 12) {
-        this.year++
-        this.month = 1
-      } else {
-        this.month++
-      }
-    },
-
-    isToday: function (day) {
-      let date = this.year + "-" + this.month + "-" + day
-      if (this.today == date) {
-        return true
-      }
-      return false
-    },
-    // ほんまっちとあわせるところ（予定作成機能）
     scheduleRan: function () {
       if (this.scheduleKinou) {
         this.scheduleKinou = false
@@ -604,7 +472,7 @@ export default {
         console.log("予定作成欄が出現したよ")
       }
     },
-    // 608～649行目 さえちゃんの色機能のとこ
+    // 477～516行目 さえちゃんの色機能のとこ
     irokinou: function () {
       if (this.colorArea) {
         this.colorArea = false
@@ -687,101 +555,24 @@ export default {
       }
     },
     // 削除ボタンを押したときの処理
-    // deleteBtn(commentIndex) {
-    //   this.items.splice(commentIndex, 1)
-    //   console.log("削除できたよ")
-    // },
+    async deleteBtn(index) {
+      this.items.splice(index, 1)
+      console.log("削除できたよ")
+      // await deleteDoc(doc(db, "Schedule", this.items.splice(index, 1)))
+      const deleteBtn = doc(db, "Schedule", "2Qm7iycwovUXyHMsRwlj")
 
-    // 153～198行目 ほんまっちとあわせるところ（コメント機能）
-    commentRan: function () {
-      if (this.commentKinou) {
-        this.commentKinou = false
-        console.log("コメント欄が消えたよ")
-      } else {
-        this.commentKinou = true
-        console.log("コメント欄が出現したよ")
-      }
+      // Remove the 'capital' field from the document
+      await updateDoc(deleteBtn, {
+        capital: deleteField(),
+      })
     },
-
-    keyDownEnter() {
-      this.inputComment = `${this.inputComment}￥n`
-      console.log("ボタンが押された！")
-    },
-
-    keyDownEnterShift() {
-      console.log("shift,enter")
-    },
-    async comment() {
-      if (this.inputComment !== "") {
-        this.containers.push({ text: this.inputComment })
-        this.items.push({ text: this.inputComment })
-        console.log(this.inputComment)
-        console.log("コメントできたよ")
-
-        let memo = {
-          text: this.inputComment,
-        }
-        await addDoc(collection(db, "Comment"), memo)
-
-        this.inputMemo = ""
-      } else {
-        alert("コメントを入力してください")
-      }
-    },
-    cancel: function () {
-      if (this.commentKinou) {
-        this.commentKinou = false
-        console.log("コメント欄が消えたよ")
-      }
-    },
-    deleteBtn(commentIndex) {
-      this.items.splice(commentIndex, 1)
-    },
-  },
-
-  mounted() {
-    let date = new Date()
-    this.year = date.getFullYear()
-    this.month = date.getMonth() + 1
-    let actualDay = date.getDate()
-    this.today = this.year + "-" + this.month + "-" + actualDay
   },
 }
+//dataプロパティとmethodsプロパティは{},になる
+//methodsの末の関数の末は{},
+//key: value,のオブジェクト
 </script>
-
-<style scoped>
-#main {
-  border: 1px solid #333;
-  width: 100%;
-}
-td {
-  border: 1px solid #333;
-  padding-bottom: 6%;
-}
-#main th {
-  text-align: center;
-  font-weight: normal;
-  color: black;
-}
-#header {
-  font-size: 24px;
-  padding: 0;
-  text-align: center;
-  margin-bottom: 10px;
-  background-color: green;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-}
-#header span {
-  padding: 15px 20px;
-  color: white;
-  display: inline-block;
-}
-.today {
-  background-color: pink;
-}
-/* ほんまっちとあわせるところ（予定作成機能） */
+<style>
 .schedule {
   display: flex;
   justify-content: flex-end;
@@ -835,42 +626,7 @@ td {
 .nichizi {
   text-align: center;
 }
-/* 242～275行目 ほんまっちとあわせるところ（コメント機能） */
-.show_return {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-.commentItem {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.calendar {
-  /* margin-left: 110px; */
-  /* display: flex; */
-}
-.textarea {
-  width: 230px;
-  height: 50px;
-}
-.commentRan {
-  border-top-style: double;
-  border-bottom-style: double;
-  border-right-style: double;
-  border-left-style: double;
-  border-color: rgb(9, 246, 9);
-  background-color: rgb(133, 246, 133);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 270px;
-  border-width: thick;
-  border-radius: 20px;
-}
-.commentButton {
-  color: aquamarine;
-}
-/* 875～1260行目 さえちゃんの色機能のとこ */
+/* 625～1009行目 さえちゃんの色機能のとこ */
 .output {
   display: center;
   width: 100px;
@@ -917,10 +673,6 @@ td {
   justify-content: space-between;
 }
 /* デフォルトカラー */
-.color {
-  position: relative;
-  right: 9px;
-}
 .color1 {
   width: 40px;
   height: 40px;

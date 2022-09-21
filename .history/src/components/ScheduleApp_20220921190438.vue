@@ -499,10 +499,7 @@ export default {
       const targetDefaultColorIndex = this.defaultColors.findIndex(
         (defaultColor) => defaultColor.id === defaultColorId
       )
-      console.log(targetDefaultColorIndex)
-      this.bgColor.backgroundColor =
-        this.defaultColors[targetDefaultColorIndex].cl
-      // await addDoc(collection(db, "Schedule"), item)
+
     },
     pastelColorBtn(pastelColorid) {
       const targetPasteltColorIndex = this.pastelColors.findIndex(
@@ -537,10 +534,12 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
-          defaultColor: this.bgColor,
-          pastelColor: this.bgColor,
-          gradationColor: this.bgColor,
-          mixColor: this.bgColor,
+          // defaultColor: this.bgColor,
+          // mixColor: this.bgColor,
+          console.log(targetDefaultColorIndex),
+          this.bgColor.backgroundColor =
+        this.defaultColors[targetDefaultColorIndex].cl
+      // await addDoc(collection(db, "Schedule"), item)
         })
         let item = {
           text: this.inputComment,
@@ -550,13 +549,16 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
-          defaultColor: this.bgColor,
-          pastelColor: this.bgColor,
-          gradationColor: this.bgColor,
-          mixColor: this.bgColor,
+          // defaultColor: this.bgColor,
+          // pastelColor: this.bgColor,
+          // gradationColor: this.bgColor,
+          // mixColor: this.bgColor,
+          console.log(targetDefaultColorIndex)
+          this.bgColor.backgroundColor =
+        this.defaultColors[targetDefaultColorIndex].cl
+      // await addDoc(collection(db, "Schedule"), item)
         }
         this.inputComment = ""
-        // this.bgColor = ""
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
@@ -564,27 +566,7 @@ export default {
 
         this.inputMemo = ""
       }
-      if (this.bgColor !== "") {
-        this.defaultColors.push({
-          defaultColor: this.bgColor,
-          // pastelColor: this.bgColor,
-          // gradationColor: this.bgColor,
-          // mixColor: this.bgColor,
-        })
-        let defaultColor = {
-          defaultColor: this.bgColor,
-        }
-
-        this.bgColor = ""
-        // console.log(this.inputComment)
-        console.log(this.defaultColors)
-        console.log("追加できてる")
-        await addDoc(collection(db, "Schedule"), defaultColor)
-
-        // this.inputMemo = ""
-      }
     },
-
     edit() {
       if (this.inputComment !== "") {
         this.inputComment = ""

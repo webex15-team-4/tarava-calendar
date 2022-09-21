@@ -603,7 +603,8 @@ export default {
       console.log("削除できたよ")
       // await deleteDoc(doc(db, "Schedule", this.items.splice(index, 1)))
       // ここの"Schedule"のあとがエラーになる
-      const deleteBtn = doc(db, "Schedule", this.items[index])
+      const deleteBtn = doc(db, "Schedule", item)
+      // this.items[index]
 
       // Remove the 'capital' field from the document
       await updateDoc(deleteBtn, {

@@ -166,8 +166,8 @@
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { db } from "../firebase"
 // 削除ボタンのimportの処理
-// import { doc, deleteDoc } from "firebase/firestore"
-import { doc, updateDoc, deleteField } from "firebase/firestore"
+import { doc, deleteDoc } from "firebase/firestore"
+// import { doc, updateDoc, deleteField } from "firebase/firestore"
 
 export default {
   data() {
@@ -603,22 +603,23 @@ export default {
       console.log("削除できたよ")
       // await deleteDoc(doc(db, "Schedule", this.items.splice(index, 1)))
       // ここの"Schedule"のあとがエラーになる
-      const deleteBtn = doc(db, "Schedule", this.items[index])
+      await deleteDoc(doc(db, "Schedule", "item"))
+      // const deleteBtn = doc(db, "Schedule", this.items[index])
 
       // Remove the 'capital' field from the document
-      await updateDoc(deleteBtn, {
-        text: deleteField(),
-        date: deleteField(),
-        time: deleteField(),
-        time2: deleteField(),
-        date2: deleteField(),
-        lastTime: deleteField(),
-        lastTime2: deleteField(),
-        defaultColor: deleteField(),
-        pastelColor: deleteField(),
-        gradationColor: deleteField(),
-        mixColor: deleteField(),
-      })
+      // await updateDoc(deleteBtn, {
+      //   text: deleteField(),
+      //   date: deleteField(),
+      //   time: deleteField(),
+      //   time2: deleteField(),
+      //   date2: deleteField(),
+      //   lastTime: deleteField(),
+      //   lastTime2: deleteField(),
+      //   defaultColor: deleteField(),
+      //   pastelColor: deleteField(),
+      //   gradationColor: deleteField(),
+      //   mixColor: deleteField(),
+      // })
     },
   },
 }

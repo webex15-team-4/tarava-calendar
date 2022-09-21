@@ -14,15 +14,9 @@
             </th>
           </thead>
           <tbody>
-            <tr
-              v-for="(weekData, weekDataIndex) in calendar"
-              :key="weekDataIndex"
-            >
-              <td
-                v-for="(dayNumber, dayNumberIndex) in weekData"
-                :key="dayNumberIndex"
-                :class="{ today: isToday(dayNumber) }"
-              >
+            <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
+              <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex"
+                :class="{ today: isToday(dayNumber) }">
                 <!-- 27行目 ほんまっちとあわせるところ -->
                 <span v-on:click="commentRan">{{ dayNumber }}</span>
               </td>
@@ -49,30 +43,18 @@
       <div class="nichizi">日時を選択</div>
       始まり
       <input type="date" name="date" v-model="selectDate" />
-      <option
-        v-for="date in optionDate"
-        v-bind:value="date.name"
-        v-bind:key="date.id"
-      >
+      <option v-for="date in optionDate" v-bind:value="date.name" v-bind:key="date.id">
         {{ date.name }}
       </option>
       <select v-model="selectedTime">
         <option disabled value="">Hour</option>
-        <option
-          v-for="time in optionTimes"
-          v-bind:value="time.name"
-          v-bind:key="time.id"
-        >
+        <option v-for="time in optionTimes" v-bind:value="time.name" v-bind:key="time.id">
           {{ time.name }}
         </option>
       </select>
       <select v-model="selectedTime2">
         <option disabled value="">Minute</option>
-        <option
-          v-for="time2 in optionTimes2"
-          v-bind:value="time2.name"
-          v-bind:key="time2.id"
-        >
+        <option v-for="time2 in optionTimes2" v-bind:value="time2.name" v-bind:key="time2.id">
           {{ time2.name }}
         </option>
       </select>
@@ -81,38 +63,26 @@
     <div class="startend3">
       終わり
       <input type="date" name="date" v-model="selectDate2" />
-      <option
-        v-for="date2 in optionDate2"
-        v-bind:value="date2.name"
-        v-bind:key="date2.id"
-      >
+      <option v-for="date2 in optionDate2" v-bind:value="date2.name" v-bind:key="date2.id">
         {{ date2.name }}
       </option>
       <select v-model="selectedTimeLast">
         <option disabled value="">Hour</option>
-        <option
-          v-for="lastTime in optionTimesLast"
-          v-bind:value="lastTime.name"
-          v-bind:key="lastTime.id"
-        >
+        <option v-for="lastTime in optionTimesLast" v-bind:value="lastTime.name" v-bind:key="lastTime.id">
           {{ lastTime.name }}
         </option>
       </select>
       <select v-model="selectedTimeLast2">
         <option disabled value="">Minute</option>
-        <option
-          v-for="lastTime2 in optionTimesLast2"
-          v-bind:value="lastTime2.name"
-          v-bind:key="lastTime2.id"
-        >
+        <option v-for="lastTime2 in optionTimesLast2" v-bind:value="lastTime2.name" v-bind:key="lastTime2.id">
           {{ lastTime2.name }}
         </option>
       </select>
       <!-- 112～169行目 さえちゃんの色機能のとこ -->
       <!-- ボタンを押したら色機能を表示 -->
+      <div style="align-content: center"></div>
       <div class="showColor" v-bind:style="selectedColor"></div>
       <button v-on:click="irokinou">背景色を変更</button>
-
       <!-- 予定の背景の色を変化...クリックした色を表示させる
     <div class="output" :style="bgColor"></div> -->
 
@@ -120,11 +90,7 @@
 
       <section v-if="colorArea" class="color">
         <div class="Palette">
-          <div
-            v-for="color in colors"
-            v-bind:key="color"
-            @click="colorBtn(color.id)"
-          >
+          <div v-for="color in colors" v-bind:key="color" @click="colorBtn(color.id)">
             <div :class="color.colorid">{{ color.color }}</div>
           </div>
         </div>
@@ -158,11 +124,7 @@
   <div v-if="commentKinou" class="calender2">
     <div class="commentRan">
       <br />
-      <textarea
-        v-model="inputComment"
-        @keydown.enter.shift.exact="keyDownEnterShift"
-        class="textarea"
-      />
+      <textarea v-model="inputComment" @keydown.enter.shift.exact="keyDownEnterShift" class="textarea" />
 
       <!-- ↑あえて書いてた\nの明示化を外した -->
       <div class="commentButton">
@@ -175,12 +137,8 @@
     </div>
 
     <ul v-if="commentAreaId !== null">
-      <li
-        class="show_return"
-        v-for="(item, commentIndex) in containers[commentAreaId].items"
-        :key="commentIndex"
-        style="list-style-type: none"
-      >
+      <li class="show_return" v-for="(item, commentIndex) in containers[commentAreaId].items" :key="commentIndex"
+        style="list-style-type: none">
         <label class="commentItem">
           <input v-model="comment.done" />
           <p :class="{ done: item.done }">{{ item.text }}</p>
@@ -361,22 +319,22 @@ export default {
         },
         {
           id: 10,
-          colorid: "color11",
+          colorid: "Gcolor11",
           cl: "linear-gradient(to right, greenyellow, greenyellow)",
         },
         {
           id: 11,
-          colorid: "color12",
+          colorid: "Gcolor12",
           cl: "linear-gradient(to right, #ffff00, #ffff00)",
         },
         {
           id: 12,
-          colorid: "color13",
+          colorid: "Gcolor13",
           cl: "linear-gradient(to right, #ff7f00, #ff7f00)",
         },
         {
           id: 13,
-          colorid: "color14",
+          colorid: "Gcolor14",
           cl: "linear-gradient(to right, rgb(56, 56, 56, rgb(56, 56, 56))",
         },
         {
@@ -838,8 +796,7 @@ td {
   justify-content: flex-end;
 }
 
-.startend {
-}
+.startend {}
 
 .scheduleKinou {
   border-top-style: double;
@@ -857,8 +814,7 @@ td {
   /* height: 200px; */
 }
 
-.startend1 {
-}
+.startend1 {}
 
 .startend2 {
   border-top-style: double;
@@ -870,8 +826,7 @@ td {
   width: 300px;
 }
 
-.startend3 {
-}
+.startend3 {}
 
 .startend4 {
   border-top-style: double;

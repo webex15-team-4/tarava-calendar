@@ -696,6 +696,7 @@ export default {
     },
     async commentpush() {
       if (this.inputComment !== "") {
+        const colord = { ...this.selectedColor }
         const item = {
           text: this.inputComment,
           date: this.selectDate,
@@ -704,7 +705,7 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
-          color: this.selectedColor,
+          color: colord,
         }
         this.items.push(item)
         console.log(this.inputComment)

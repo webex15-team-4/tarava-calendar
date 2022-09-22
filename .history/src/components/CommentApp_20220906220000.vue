@@ -1,5 +1,8 @@
 <template>
   <button v-on:click="commentRan">りんご</button>
+  <!-- <div class="inputComment">{{ inputComment }}</div> -->
+  <!-- show_returnのスタイルを適応 -->
+  <!-- <div class="inputComment show_return">{{ inputComment }}</div> -->
 
   <div v-if="commentKinou">
     <textarea
@@ -12,6 +15,8 @@
     <button v-on:click="cancel">キャンセル</button>
 
     <ul>
+      <!-- <li v-for="(item, index) in items" :key="index"> -->
+      <!-- show_returnのスタイルを適応 -->
       <li class="show_return" v-for="(item, index) in items" :key="index">
         <span>{{ item.text }}</span>
       </li>
@@ -21,24 +26,21 @@
 
 <script>
 export default {
-  // props: ["commentRan"],
   data() {
     return {
       inputComment: "",
       items: [],
-      commentKinou: false,
+      commentKinou: true or false
     }
   },
   methods: {
-    commentRan: function () {
-      if (this.commentKinou) {
-        this.commentKinou = false
-        console.log("コメント欄が消えたよ")
-      } else {
-        this.commentKinou = true
-        console.log("コメント欄が出現したよ")
-      }
-    },
+    commentRan: function (this.commentKinou:false) {
+      this.commentKinou:true
+      console.log("コメント欄が出現したよ")
+    },else (this.commentKinou:true) {
+      this.commentKinou:false
+      console.log("コメント欄が出現したよ②")
+    }
 
     keyDownEnter() {
       this.inputComment = `${this.inputComment}￥n`
@@ -48,6 +50,10 @@ export default {
     keyDownEnterShift() {
       console.log("shift,enter")
     },
+
+    // keyUpEnter() {
+    //   console.log("ボタンが離れた！")
+    // },
 
     comment() {
       if (this.inputComment !== "") {
@@ -67,16 +73,18 @@ export default {
           {
             // this.inputComment = ""
           }
+      this.inputComment = ""
     },
   },
 }
-// dataプロパティとmethodsプロパティは{},になる
-// methodsの末の関数の末は{},
-// key: value,のオブジェクト
+//dataプロパティとmethodsプロパティは{},になる
+//methodsの末の関数の末は{},
+//key: value,のオブジェクト
 </script>
 
 <style>
-これは半角スペースや改行の扱い方を示している .show_return {
+/* これは半角スペースや改行の扱い方を示している */
+.show_return {
   white-space: pre-wrap;
   word-wrap: break-word;
 }

@@ -24,12 +24,6 @@
       </tbody>
     </table>
   </div>
-  <!-- <img
-    id="photo"
-    v-on:click="lastMonth"
-    src="https://beiz.jp/images_T/sky/sky_00122.jpg"
-    alt="yuyake"
-  /> -->
 </template>
 -->
 

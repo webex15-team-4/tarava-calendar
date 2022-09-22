@@ -2,25 +2,17 @@
   <div id="app">
     <Login />
     <Calendar />
-    <ScheduleApp />
   </div>
   <p class="gradation2"><a href="">Tarava-calendar</a></p>
 </template>
 
 <script>
-// import CommentApp from "./components/CommentApp.vue"
-// import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
 import Login from "@/components/LoginView.vue"
-import ScheduleApp from "@/components/ScheduleApp.vue"
-
-//import Login from "@/components/LoginView.vue"
 export default {
   components: {
-    // CommentApp,
     Calendar,
     Login,
-    ScheduleApp,
   },
 }
 </script>
@@ -61,9 +53,11 @@ nav a.router-link-exact-active {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }

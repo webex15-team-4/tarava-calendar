@@ -153,7 +153,7 @@
       <div class="commentButton">
         <br />
         <button v-on:click="comment(commentAreaId)">コメント</button>
-        &nbsp; &nbsp; &nbsp;
+        &nbsp;
         <button v-on:click="cancel">キャンセル</button>
         <!-- 50行目 必要かわからない処理 -->
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->

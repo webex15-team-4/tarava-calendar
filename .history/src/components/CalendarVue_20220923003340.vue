@@ -153,7 +153,6 @@
       <div class="commentButton">
         <br />
         <button v-on:click="comment(commentAreaId)">コメント</button>
-        &nbsp; &nbsp; &nbsp;
         <button v-on:click="cancel">キャンセル</button>
         <!-- 50行目 必要かわからない処理 -->
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
@@ -972,6 +971,9 @@ td {
 
 .commentButton {
   color: #f2b47e;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 875～1260行目 さえちゃんの色機能のとこ */

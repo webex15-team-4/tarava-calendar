@@ -153,7 +153,6 @@
       <div class="commentButton">
         <br />
         <button v-on:click="comment(commentAreaId)">コメント</button>
-        &nbsp; &nbsp; &nbsp;
         <button v-on:click="cancel">キャンセル</button>
         <!-- 50行目 必要かわからない処理 -->
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
@@ -865,7 +864,7 @@ td {
   border-bottom-style: double;
   border-right-style: double;
   border-left-style: double;
-  border-color: #dc9855;
+  border-color: #e0a66c;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -881,7 +880,7 @@ td {
 
 .startend2 {
   border-top-style: double;
-  border-color: #dc9855;
+  border-color: #e0a66c;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -894,7 +893,7 @@ td {
 
 .startend4 {
   border-top-style: double;
-  border-color: #dc9855;
+  border-color: #e0a66c;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -960,7 +959,7 @@ td {
   border-bottom-style: double;
   border-right-style: double;
   border-left-style: double;
-  border-color: #dc9855;
+  border-color: #e0a66c;
   background: #f2b47e;
   display: block;
   margin-left: auto;

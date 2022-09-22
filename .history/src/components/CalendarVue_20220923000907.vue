@@ -153,7 +153,6 @@
       <div class="commentButton">
         <br />
         <button v-on:click="comment(commentAreaId)">コメント</button>
-        &nbsp; &nbsp; &nbsp;
         <button v-on:click="cancel">キャンセル</button>
         <!-- 50行目 必要かわからない処理 -->
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
@@ -854,7 +853,7 @@ td {
 }
 
 .scheduleRan:hover {
-  background: #f2b47e;
+  background: linear-gradient(to bottom, #759d9d, #e2b78d);
 }
 
 .startend {
@@ -865,13 +864,13 @@ td {
   border-bottom-style: double;
   border-right-style: double;
   border-left-style: double;
-  border-color: #dc9855;
+  border-color: linear-gradient(to bottom, #51a0a0, #e0a66c);
   display: block;
   margin-left: auto;
   margin-right: auto;
   border-width: thick;
   width: 300px;
-  background: #f2b47e;
+  background: linear-gradient(to bottom, #759d9d, #e2b78d);
   border-radius: 20px;
   /* height: 200px; */
 }
@@ -881,7 +880,7 @@ td {
 
 .startend2 {
   border-top-style: double;
-  border-color: #dc9855;
+  border-color: linear-gradient(to bottom, #51a0a0, #e0a66c);
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -894,7 +893,7 @@ td {
 
 .startend4 {
   border-top-style: double;
-  border-color: #dc9855;
+  border-color: linear-gradient(to bottom, #51a0a0, #e0a66c);
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -960,8 +959,8 @@ td {
   border-bottom-style: double;
   border-right-style: double;
   border-left-style: double;
-  border-color: #dc9855;
-  background: #f2b47e;
+  border-color: linear-gradient(to bottom, #51a0a0, #e0a66c);
+  background: linear-gradient(to bottom, #759d9d, #e2b78d);
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -971,7 +970,7 @@ td {
 }
 
 .commentButton {
-  color: #f2b47e;
+  color: linear-gradient(to bottom, #759d9d, #e2b78d);
 }
 
 /* 875～1260行目 さえちゃんの色機能のとこ */

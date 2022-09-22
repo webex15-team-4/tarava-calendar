@@ -2,7 +2,6 @@
   <div id="app">
     <Login />
     <Calendar />
-    <ScheduleApp />
   </div>
   <p class="gradation2"><a href="">Tarava-calendar</a></p>
 </template>
@@ -18,18 +17,6 @@ export default {
 }
 </script>
 
-<script>
-import CommentApp from "./components/CommentApp.vue"
-import ScheduleApp from "@/components/ScheduleApp.vue"
-
-export default {
-  components: {
-    CommentApp,
-    ScheduleApp,
-  },
-}
-</script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -37,12 +24,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: linear-gradient(to bottom,
-      #324373,
-      #6ba5f2,
-      #77abd9,
-      #f2b47e,
-      #f28972);
+  background-image: linear-gradient(
+    to bottom,
+    #324373,
+    #6ba5f2,
+    #77abd9,
+    #f2b47e,
+    #f28972
+  );
   background-size: cover;
   background-repeat: no-repeat;
 }

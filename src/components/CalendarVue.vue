@@ -14,15 +14,9 @@
             </th>
           </thead>
           <tbody>
-            <tr
-              v-for="(weekData, weekDataIndex) in calendar"
-              :key="weekDataIndex"
-            >
-              <td
-                v-for="(dayNumber, dayNumberIndex) in weekData"
-                :key="dayNumberIndex"
-                :class="{ today: isToday(dayNumber) }"
-              >
+            <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
+              <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex"
+                :class="{ today: isToday(dayNumber) }">
                 <!-- 27行目 ほんまっちとあわせるところ -->
                 <span v-on:click="commentRan">{{ dayNumber }}</span>
               </td>
@@ -49,30 +43,18 @@
       <div class="nichizi">日時を選択</div>
       始まり
       <input type="date" name="date" v-model="selectDate" />
-      <option
-        v-for="date in optionDate"
-        v-bind:value="date.name"
-        v-bind:key="date.id"
-      >
+      <option v-for="date in optionDate" v-bind:value="date.name" v-bind:key="date.id">
         {{ date.name }}
       </option>
       <select v-model="selectedTime">
         <option disabled value="">Hour</option>
-        <option
-          v-for="time in optionTimes"
-          v-bind:value="time.name"
-          v-bind:key="time.id"
-        >
+        <option v-for="time in optionTimes" v-bind:value="time.name" v-bind:key="time.id">
           {{ time.name }}
         </option>
       </select>
       <select v-model="selectedTime2">
         <option disabled value="">Minute</option>
-        <option
-          v-for="time2 in optionTimes2"
-          v-bind:value="time2.name"
-          v-bind:key="time2.id"
-        >
+        <option v-for="time2 in optionTimes2" v-bind:value="time2.name" v-bind:key="time2.id">
           {{ time2.name }}
         </option>
       </select>
@@ -81,30 +63,18 @@
     <div class="startend3">
       終わり
       <input type="date" name="date" v-model="selectDate2" />
-      <option
-        v-for="date2 in optionDate2"
-        v-bind:value="date2.name"
-        v-bind:key="date2.id"
-      >
+      <option v-for="date2 in optionDate2" v-bind:value="date2.name" v-bind:key="date2.id">
         {{ date2.name }}
       </option>
       <select v-model="selectedTimeLast">
         <option disabled value="">Hour</option>
-        <option
-          v-for="lastTime in optionTimesLast"
-          v-bind:value="lastTime.name"
-          v-bind:key="lastTime.id"
-        >
+        <option v-for="lastTime in optionTimesLast" v-bind:value="lastTime.name" v-bind:key="lastTime.id">
           {{ lastTime.name }}
         </option>
       </select>
       <select v-model="selectedTimeLast2">
         <option disabled value="">Minute</option>
-        <option
-          v-for="lastTime2 in optionTimesLast2"
-          v-bind:value="lastTime2.name"
-          v-bind:key="lastTime2.id"
-        >
+        <option v-for="lastTime2 in optionTimesLast2" v-bind:value="lastTime2.name" v-bind:key="lastTime2.id">
           {{ lastTime2.name }}
         </option>
       </select>
@@ -117,52 +87,10 @@
     <div class="output" :style="bgColor"></div> -->
 
       <!-- Paletteを作る -->
-      <!-- デフォルトカラー14色 -->
       <section v-if="colorArea" class="color">
-        <div class="DefaultPalette">
-          <div
-            v-for="(defaultColor, defaultColorIndex) in defaultColors"
-            :key="defaultColorIndex"
-            @click="defaultColorBtn(defaultColor.id)"
-          >
-            <div :class="defaultColor.colorid">{{ defaultColor.color }}</div>
-          </div>
-        </div>
-        <!-- パステルカラー12色 -->
-        <div class="PastelPalette">
-          <br />
-          <div
-            v-for="(pastelColor, pastelColorIndex) in pastelColors"
-            :key="pastelColorIndex"
-            @click="pastelColorBtn(pastelColor.id)"
-          >
-            <div :class="pastelColor.colorid">{{ pastelColor.color }}</div>
-          </div>
-        </div>
-
-        <!-- グラデーション11色 -->
-        <div class="GradationColor">
-          <br />
-          <div
-            v-for="(gradationColor, gradationColorIndex) in gradationColors"
-            :key="gradationColorIndex"
-            @click="gradationColorBtn(gradationColor.id)"
-          >
-            <div :class="gradationColor.colorid">
-              {{ gradationColor.color }}
-            </div>
-          </div>
-        </div>
-
-        <!-- ミックス6色 -->
-        <div class="MixColor">
-          <br />
-          <div
-            v-for="(mixColor, mixColorIndex) in mixColors"
-            :key="mixColorIndex"
-            @click="mixColorBtn(mixColor.id)"
-          >
-            <div :class="mixColor.colorid">{{ mixColor.color }}</div>
+        <div class="Palette">
+          <div v-for="color in colors" v-bind:key="color" @click="colorBtn(color.id)">
+            <div :class="color.colorid">{{ color.color }}</div>
           </div>
         </div>
       </section>
@@ -181,11 +109,7 @@
   <div v-if="commentKinou" class="calender3">
     <div class="commentRan">
       <br />
-      <textarea
-        v-model="inputComment"
-        @keydown.enter.shift.exact="keyDownEnterShift"
-        class="textarea"
-      />
+      <textarea v-model="inputComment" @keydown.enter.shift.exact="keyDownEnterShift" class="textarea" />
 
       <!-- ↑あえて書いてた\nの明示化を外した -->
       <div class="commentButton">
@@ -197,12 +121,8 @@
       </div>
     </div>
     <!-- <ul v-if="commentAreaId !== null"> -->
-    <li
-      class="show_return"
-      v-for="(comment, commentIndex) in comments"
-      :key="commentIndex"
-      style="list-style-type: none"
-    >
+    <li class="show_return" v-for="(comment, commentIndex) in comments" :key="commentIndex"
+      style="list-style-type: none">
       <label class="commentItem">
         <!-- <input v-model="comment.done" /> -->
         <p>{{ comment }}</p>
@@ -841,15 +761,18 @@ export default {
   border: 1px solid #333;
   width: 100%;
 }
+
 td {
   border: 1px solid #333;
   padding-bottom: 6%;
 }
+
 #main th {
   text-align: center;
   font-weight: normal;
   color: black;
 }
+
 #header {
   font-size: 24px;
   padding: 0;
@@ -860,28 +783,34 @@ td {
   display: flex;
   justify-content: space-between;
 }
+
 #header span {
   padding: 15px 20px;
   color: white;
   display: inline-block;
 }
+
 .today {
   background-color: pink;
 }
+
 /* ほんまっちとあわせるところ（予定作成機能） */
 .schedule {
   display: flex;
   justify-content: flex-end;
 }
+
 .scheduleRan {
   background-color: white;
   border: 1px solid;
 }
+
 .scheduleRan:hover {
   background-color: pink;
 }
-.startend {
-}
+
+.startend {}
+
 .scheduleKinou {
   border-top-style: double;
   border-bottom-style: double;
@@ -897,8 +826,9 @@ td {
   border-radius: 20px;
   /* height: 200px; */
 }
-.startend1 {
-}
+
+.startend1 {}
+
 .startend2 {
   border-top-style: double;
   border-color: #faa9b6;
@@ -908,8 +838,9 @@ td {
   border-width: thick;
   width: 300px;
 }
-.startend3 {
-}
+
+.startend3 {}
+
 .startend4 {
   border-top-style: double;
   border-color: #faa9b6;
@@ -920,9 +851,11 @@ td {
   width: 300px;
   radius: 50px;
 }
+
 .li {
   list-style: none;
 }
+
 .itemColor {
   height: 30px;
   line-height: 30px;
@@ -933,16 +866,20 @@ td {
 .scheduleButton1 {
   margin-right: 20px;
 }
+
 .scheduleButton2 {
   margin-right: 20px;
 }
+
 .nichizi {
   text-align: center;
 }
+
 /* 242～275行目 ほんまっちとあわせるところ（コメント機能） */
 .calendar3 {
   cursor: pointer;
 }
+
 /* .calender3:hover {
   background-color: green;
 } */
@@ -950,19 +887,23 @@ td {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
 .commentItem {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .calendar {
   /* margin-left: 110px; */
   /* display: flex; */
 }
+
 .textarea {
   width: 230px;
   height: 50px;
 }
+
 .commentRan {
   border-top-style: double;
   border-bottom-style: double;
@@ -977,9 +918,11 @@ td {
   border-width: thick;
   border-radius: 20px;
 }
+
 .commentButton {
   color: aquamarine;
 }
+
 /* 875～1260行目 さえちゃんの色機能のとこ */
 .output {
   display: center;
@@ -987,6 +930,7 @@ td {
   height: 50px;
   animation: bggradient 5s ease infinite;
 }
+
 .colorArea {
   display: flex;
   flex-direction: row;
@@ -994,6 +938,7 @@ td {
   width: 300px;
   justify-content: space-between;
 }
+
 .Palette {
   display: flex;
   flex-direction: row;
@@ -1002,95 +947,111 @@ td {
   margin: 3%;
   justify-content: space-between;
 }
+
 /* デフォルトカラー */
 .color {
   position: relative;
   right: 9px;
 }
+
 .color1 {
   width: 40px;
   height: 40px;
   background-color: rgb(233, 37, 37);
   border-radius: 50% 50% 0 50%;
 }
+
 .color2 {
   width: 40px;
   height: 40px;
   background-color: #ff007f;
   border-radius: 50% 50% 0 50%;
 }
+
 .color3 {
   width: 40px;
   height: 40px;
   background-color: #ff00ff;
   border-radius: 50% 50% 0 50%;
 }
+
 .color4 {
   width: 40px;
   height: 40px;
   background-color: #7f00ff;
   border-radius: 50% 50% 0 50%;
 }
+
 .color5 {
   width: 40px;
   height: 40px;
   background-color: rgb(183, 4, 183);
   border-radius: 50% 50% 0 50%;
 }
+
 .color6 {
   width: 40px;
   height: 40px;
   background-color: #0000ff;
   border-radius: 50% 50% 0 50%;
 }
+
 .color8 {
   width: 40px;
   height: 40px;
   background-color: #007fff;
   border-radius: 50% 50% 0 50%;
 }
+
 .color7 {
   width: 40px;
   height: 40px;
   background-color: #00ffff;
   border-radius: 50% 50% 0 50%;
 }
+
 .color9 {
   width: 40px;
   height: 40px;
   background-color: #00ff7f;
   border-radius: 50% 50% 0 50%;
 }
+
 .color10 {
   width: 40px;
   height: 40px;
   background-color: #00ff00;
   border-radius: 50% 50% 0 50%;
 }
+
 .color11 {
   width: 40px;
   height: 40px;
   background-color: greenyellow;
   border-radius: 50% 50% 0 50%;
 }
+
 .color12 {
   width: 40px;
   height: 40px;
   background-color: #ffff00;
   border-radius: 50% 50% 0 50%;
 }
+
 .color13 {
   width: 40px;
   height: 40px;
   background-color: #ff7f00;
   border-radius: 50% 50% 0 50%;
 }
+
 .color14 {
   width: 40px;
   height: 40px;
   background-color: rgb(56, 56, 56);
   border-radius: 50% 50% 0 50%;
 }
+
 /* パステルカラー */
 .Pcolor1 {
   width: 40px;
@@ -1098,84 +1059,98 @@ td {
   background-color: #ff7f7f;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor2 {
   width: 40px;
   height: 40px;
   background-color: #ff7fbf;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor3 {
   width: 40px;
   height: 40px;
   background-color: #ff7fff;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor4 {
   width: 40px;
   height: 40px;
   background-color: #bf7fff;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor5 {
   width: 40px;
   height: 40px;
   background-color: #7f7fff;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor6 {
   width: 40px;
   height: 40px;
   background-color: #7fbfff;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor7 {
   width: 40px;
   height: 40px;
   background-color: #7fffff;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor8 {
   width: 40px;
   height: 40px;
   background-color: #84ffc1;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor9 {
   width: 40px;
   height: 40px;
   background-color: #7fff7f;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor10 {
   width: 40px;
   height: 40px;
   background-color: #bfff7f;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor11 {
   width: 40px;
   height: 40px;
   background-color: #ffff6f;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor12 {
   width: 40px;
   height: 40px;
   background-color: #ffbf7f;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor13 {
   width: 40px;
   height: 40px;
   background-color: #dbf594;
   border-radius: 50% 50% 0 50%;
 }
+
 .Pcolor14 {
   width: 40px;
   height: 40px;
   background-color: #878484a7;
   border-radius: 50% 50% 0 50%;
 }
+
 /* グラデーション */
 .Gcolor1 {
   width: 40px;
@@ -1183,84 +1158,98 @@ td {
   background-image: linear-gradient(to right, red, #f6d0d0);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor2 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #ff007f, #fde6f2);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor3 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #7f00ff, #f6d3f6);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor4 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #0000ff, #e7e0fa);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor5 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #007fff, #d1e3f4);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor6 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #00ffff, #dbfbfb);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor7 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #00ff7f, #d2fde7);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor8 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #00ff00, #d7f5d7);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor9 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #7fff00, #e3f2d4);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor10 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #ffff00, #fbfbd3);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor11 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #ff7f00, #f3e1d0);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor12 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #ff5acd, #f3e1d0);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor13 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #faaca8, #ddd6f3);
   border-radius: 50% 50% 0 50%;
 }
+
 .Gcolor14 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #85ffbd, #fffb7d);
   border-radius: 50% 50% 0 50%;
 }
+
 /* ミックスカラー */
 .Mcolor1 {
   width: 40px;
@@ -1268,84 +1257,98 @@ td {
   background-image: linear-gradient(to right, red, yellow);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor2 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #3eecac, #ee74e1);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor3 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #00dbde, #fc00ff);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor4 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #c850c0, #4158d0);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor5 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #ff7f00, rgb(250, 250, 29));
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor6 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #f4d03f, #16a085);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor7 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #52acff, #ffe32c);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor8 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #fbab7e, #f7eb68);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor9 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #fee140, #fa709a);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor10 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #6284ff, #ff0000);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor11 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #ffe53b, #ff2525);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor12 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #f9ea3d, #f76b1c);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor13 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #fa8bff, #2bd2ff, #2bff88);
   border-radius: 50% 50% 0 50%;
 }
+
 .Mcolor14 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, #4158d0, #c850c0, #ffcc70);
   border-radius: 50% 50% 0 50%;
 }
+
 .showColor {
   width: 40px;
   height: 40px;

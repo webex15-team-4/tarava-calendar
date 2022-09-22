@@ -1,6 +1,7 @@
 <template>
   <header>
     <div class="drawer">
+      <p class="gradation"><a href="">Tarava-calendar</a></p>
       <input type="checkbox" id="drawer-check" class="drawer-hidden" />
       <label for="drawer-check" class="drawer-open"><span></span></label>
       <nav class="drawer-content">
@@ -100,9 +101,11 @@ export default {
   padding: 0 20px;
   background: #fff;
 }
+
 .drawer-hidden {
   display: none;
 }
+
 .drawer-open {
   display: flex;
   height: 60px;
@@ -114,6 +117,7 @@ export default {
   /* 重なり順を一番上に */
   cursor: pointer;
 }
+
 .drawer-open span,
 .drawer-open span:before,
 .drawer-open span:after {
@@ -126,15 +130,19 @@ export default {
   transition: 0.5s;
   position: absolute;
 }
+
 drawer-open span:before {
   bottom: 8px;
 }
+
 .drawer-open span:after {
   top: 8px;
 }
+
 #drawer-check:checked ~ .drawer-open span {
   background: rgba(255, 255, 255, 0);
 }
+
 #drawer-check:checked ~ .drawer-open span::before {
   bottom: 0;
   transform: rotate(45deg);
@@ -143,6 +151,7 @@ drawer-open span:before {
   top: 0;
   transform: rotate(-45deg);
 }
+
 .drawer-content {
   width: 100%;
   height: 100%;
@@ -153,11 +162,36 @@ drawer-open span:before {
   background: #fff;
   transition: 0.5s;
 }
+
 #drawer-check:checked ~ .drawer-content {
   left: 0;
 }
+
 .thick {
   font-weight: bold;
   font-size: large;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.gradation a {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  border-radius: 50%;
+  display: left;
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 40px;
+  color: rgb(246, 241, 236);
 }
 </style>

@@ -104,7 +104,7 @@
     </section>
   </div>
 </template>
-
+1
 <script>
 export default {
   data() {
@@ -652,6 +652,21 @@ export default {
   height: 40px;
   background-image: linear-gradient(to right, #ff007f, #fde6f2);
   border-radius: 50% 50% 0 50%;
+  background-size: 150% 150%;
+  animation-name: gradation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes gradation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 .Gcolor3 {
   width: 40px;

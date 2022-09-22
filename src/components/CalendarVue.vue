@@ -24,6 +24,12 @@
       </tbody>
     </table>
   </div>
+  <!-- <img
+    id="photo"
+    v-on:click="lastMonth"
+    src="https://beiz.jp/images_T/sky/sky_00122.jpg"
+    alt="yuyake"
+  /> -->
 </template>
 -->
 
@@ -35,6 +41,7 @@ export default {
       year: 2021,
       month: 3,
       today: "",
+      image: ["9-yuyake.jpg", "10-moon.jpeg"],
     }
   },
   computed: {
@@ -75,6 +82,7 @@ export default {
         this.month = 1
       } else {
         this.month++
+        console.log("次の月")
       }
     },
 
@@ -99,34 +107,37 @@ export default {
 
 <style scoped>
 #main {
-  border: 1px solid #333;
   width: 100%;
+  background: linear-gradient(to bottom, #759d9d, #e2b78d);
+  color: white;
+  font-size: 150%;
+  font-weight: 300;
+  justify-content: space-evenly;
 }
 td {
-  border: 1px solid #333;
+  border: 2px solid rgba(241, 239, 239, 0.69);
   padding-bottom: 6%;
 }
 #main th {
   text-align: center;
   font-weight: normal;
-  color: black;
+  color: white;
 }
 #header {
-  font-size: 24px;
+  font-size: 35px;
   padding: 0;
   text-align: center;
-  margin-bottom: 10px;
-  background-color: green;
-  border-bottom: 1px solid #ddd;
+  background-color: rgba(249, 250, 250, 0);
+  border-bottom: 2px solid #ddd;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 #header span {
-  padding: 15px 20px;
-  color: white;
+  padding: 15px 30px;
+  color: rgb(255, 255, 255);
   display: inline-block;
 }
 .today {
-  background-color: pink;
+  background-color: rgb(192, 180, 182);
 }
 </style>

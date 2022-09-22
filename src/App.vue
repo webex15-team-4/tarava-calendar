@@ -2,6 +2,7 @@
   <div id="app">
     <Login />
     <Calendar />
+    <ScheduleApp />
   </div>
 </template>
 
@@ -10,14 +11,15 @@
 // import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
 import Login from "@/components/LoginView.vue"
+import ScheduleApp from "@/components/ScheduleApp.vue"
 
 //import Login from "@/components/LoginView.vue"
 export default {
   components: {
     // CommentApp,
-    // ScheduleApp,
     Calendar,
     Login,
+    ScheduleApp,
   },
 }
 </script>
@@ -29,6 +31,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: url(https://thumb.photo-ac.com/d4/d4644727c8b6bb2cd8001c4d4a761d12_t.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 nav {

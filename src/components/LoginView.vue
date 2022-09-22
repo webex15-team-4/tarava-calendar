@@ -1,6 +1,7 @@
 <template>
   <header>
     <div class="drawer">
+      <p class="gradation"><a href="">Tarava-calendar</a></p>
       <input type="checkbox" id="drawer-check" class="drawer-hidden" />
       <label for="drawer-check" class="drawer-open"><span></span></label>
       <nav class="drawer-content">
@@ -172,5 +173,28 @@ drawer-open span:before {
 .thick {
   font-weight: bold;
   font-size: large;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.gradation a {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  border-radius: 50%;
+  display: left;
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 40px;
+  color: rgb(246, 241, 236);
 }
 </style>

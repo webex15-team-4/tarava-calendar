@@ -1,7 +1,14 @@
 <template>
   <button v-on:click="commentRan">りんご</button>
+  <!-- <div class="inputComment">{{ inputComment }}</div> -->
+  <!-- show_returnのスタイルを適応 -->
+  <!-- <div class="inputComment show_return">{{ inputComment }}</div> -->
 
-  <div v-if="commentKinou">
+  <div
+    v-if="commentKinou"
+    class="commentKinou"
+    v-bind:style="{ backgroundColor: bgColor }"
+  >
     <textarea
       v-model="inputComment"
       @keydown.enter.shift.exact="keyDownEnterShift"
@@ -12,6 +19,8 @@
     <button v-on:click="cancel">キャンセル</button>
 
     <ul>
+      <!-- <li v-for="(item, index) in items" :key="index"> -->
+      <!-- show_returnのスタイルを適応 -->
       <li class="show_return" v-for="(item, index) in items" :key="index">
         <span>{{ item.text }}</span>
       </li>
@@ -21,7 +30,7 @@
 
 <script>
 export default {
-  // props: ["commentRan"],
+  props: ["bgColor"],
   data() {
     return {
       inputComment: "",
@@ -49,6 +58,10 @@ export default {
       console.log("shift,enter")
     },
 
+    // keyUpEnter() {
+    //   console.log("ボタンが離れた！")
+    // },
+
     comment() {
       if (this.inputComment !== "") {
         this.items.push({ text: this.inputComment })
@@ -67,16 +80,18 @@ export default {
           {
             // this.inputComment = ""
           }
+      this.inputComment = ""
     },
   },
 }
-// dataプロパティとmethodsプロパティは{},になる
-// methodsの末の関数の末は{},
-// key: value,のオブジェクト
+//dataプロパティとmethodsプロパティは{},になる
+//methodsの末の関数の末は{},
+//key: value,のオブジェクト
 </script>
 
 <style>
-これは半角スペースや改行の扱い方を示している .show_return {
+/* これは半角スペースや改行の扱い方を示している */
+.show_return {
   white-space: pre-wrap;
   word-wrap: break-word;
 }

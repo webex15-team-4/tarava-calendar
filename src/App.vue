@@ -1,32 +1,18 @@
 <template>
-  <!-- <CommentApp /> -->
-  <nav>
-    <router-link to="/">Home</router-link> |<router-link to="/login"
-      >ログイン</router-link
-    >|
-    <router-link to="/about">About</router-link>
-  </nav>
-  <!-- <router-view /> -->
-
-  <Login />
-  <Calendar />
-  <!-- <ScheduleApp /> -->
-  <!-- <KUziApp /> -->
+  <div id="app">
+    <Login />
+    <Calendar />
+  </div>
+  <p class="gradation2"><a href="">Tarava-calendar</a></p>
 </template>
 
 <script>
-// import CommentApp from "./components/CommentApp.vue"
-// import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
 import Login from "@/components/LoginView.vue"
-// import KUziApp from "@/components/KUziApp.vue"
 export default {
   components: {
-    // CommentApp,
-    // ScheduleApp,
     Calendar,
     Login,
-    // KUziApp,
   },
 }
 </script>
@@ -38,6 +24,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: linear-gradient(
+    to bottom,
+    #324373,
+    #6ba5f2,
+    #77abd9,
+    #f2b47e,
+    #f28972
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 nav {
@@ -51,5 +47,30 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradation2 a {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  display: block;
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
 }
 </style>

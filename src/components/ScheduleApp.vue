@@ -104,7 +104,7 @@
     </section>
   </div>
 </template>
-1
+
 <script>
 export default {
   data() {
@@ -640,11 +640,24 @@ export default {
 }
 
 /* グラデーション */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .Gcolor1 {
   width: 40px;
   height: 40px;
   background-image: linear-gradient(to right, red, #f6d0d0);
   border-radius: 50% 50% 0 50%;
+  animation-name: gradient 5s ease infinite;
 }
 
 .Gcolor2 {
@@ -658,15 +671,6 @@ export default {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
-}
-
-@keyframes gradation {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
 }
 .Gcolor3 {
   width: 40px;
@@ -825,5 +829,6 @@ export default {
   height: 40px;
   background-image: linear-gradient(to right, #4158d0, #c850c0, #ffcc70);
   border-radius: 50% 50% 0 50%;
+  animation: gradient 3s ease infinite;
 }
 </style>

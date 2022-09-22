@@ -206,7 +206,7 @@
       <label class="commentItem">
         <!-- <input v-model="comment.done" /> -->
         <p>{{ comment }}</p>
-        <!-- <button v-on:click="deleteBtn(commentIndex)">削除</button> -->
+        <button v-on:click="deleteBtn(commentIndex)">削除</button>
       </label>
     </li>
     <!-- </ul> -->

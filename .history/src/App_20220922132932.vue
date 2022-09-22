@@ -1,5 +1,5 @@
 <template>
-  <!-- <CommentApp /> -->
+  <CommentApp />
   <nav>
     <router-link to="/">Home</router-link> |<router-link to="/login"
       >ログイン</router-link
@@ -10,20 +10,20 @@
 
   <Login />
   <Calendar />
-  <!-- <ScheduleApp /> -->
+  <ScheduleApp />
   <!-- <KUziApp /> -->
 </template>
 
 <script>
-// import CommentApp from "./components/CommentApp.vue"
-// import ScheduleApp from "@/components/ScheduleApp.vue"
+import CommentApp from "./components/CommentApp.vue"
+import ScheduleApp from "@/components/ScheduleApp.vue"
 import Calendar from "@/components/CalendarVue.vue"
 import Login from "@/components/LoginView.vue"
 // import KUziApp from "@/components/KUziApp.vue"
 export default {
   components: {
-    // CommentApp,
-    // ScheduleApp,
+    CommentApp,
+    ScheduleApp,
     Calendar,
     Login,
     // KUziApp,

@@ -196,20 +196,20 @@
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
       </div>
     </div>
-    <!-- <ul v-if="commentAreaId !== null"> -->
-    <li
-      class="show_return"
-      v-for="(comment, commentIndex) in comments"
-      :key="commentIndex"
-      style="list-style-type: none"
-    >
-      <label class="commentItem">
-        <!-- <input v-model="comment.done" /> -->
-        <p>{{ comment }}</p>
-        <!-- <button v-on:click="deleteBtn(commentIndex)">削除</button> -->
-      </label>
-    </li>
-    <!-- </ul> -->
+    <ul v-if="commentAreaId !== null">
+      <li
+        class="show_return"
+        v-for="(comment, commentIndex) in comments"
+        :key="commentIndex"
+        style="list-style-type: none"
+      >
+        <label class="commentItem">
+          <input v-model="comment.done" />
+          <p :class="{ done: comment.done }">{{ comment.text }}</p>
+          <button v-on:click="deleteBtn(commentIndex)">削除</button>
+        </label>
+      </li>
+    </ul>
   </div>
   <div>
     <!-- <ul class="ul"> -->
@@ -681,17 +681,7 @@ export default {
     })
     console.log(this.items)
     console.log(typeof this.items)
-
-    const q1 = query(collection(db, "Comment"))
-    const querySnapshot1 = await getDocs(q1)
-    console.log(querySnapshot1)
-    querySnapshot1.forEach((doc) => {
-      this.comments.push(doc.data().text)
-    })
-    console.log(this.items)
-    console.log(typeof this.items)
   },
-
   methods: {
     lastMonth: function () {
       if (this.month == 1) {
@@ -823,7 +813,7 @@ export default {
       }
     },
     deleteBtn(commentIndex) {
-      this.comments.splice(commentIndex, 1)
+      this.items.splice(commentIndex, 1)
     },
   },
   mounted() {

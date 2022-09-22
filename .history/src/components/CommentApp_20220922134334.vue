@@ -64,8 +64,9 @@ export default {
       } else
         this.inputComment === "",
           {
-            // this.inputComment = ""
+            this.inputComment = ""
           }
+      // this.inputComment = ""
     },
   },
 }

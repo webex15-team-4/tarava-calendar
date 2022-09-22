@@ -7,7 +7,7 @@
       @keydown.enter.shift.exact="keyDownEnterShift"
       class="textarea"
     />
-    <!-- ↑あえて書いてた\nの明示化を外した -->
+    ↑あえて書いてた\nの明示化を外した
     <button v-on:click="comment">コメント</button>
     <button v-on:click="cancel">キャンセル</button>
 
@@ -48,6 +48,8 @@ export default {
       console.log("shift,enter")
     },
 
+
+
     comment() {
       if (this.inputComment !== "") {
         this.items.push({ text: this.inputComment })
@@ -64,14 +66,15 @@ export default {
       } else
         this.inputComment === "",
           {
-            // this.inputComment = ""
+            this.inputComment = ""
           }
+      this.inputComment = ""
     },
   },
 }
-// dataプロパティとmethodsプロパティは{},になる
-// methodsの末の関数の末は{},
-// key: value,のオブジェクト
+dataプロパティとmethodsプロパティは{},になる
+methodsの末の関数の末は{},
+key: value,のオブジェクト
 </script>
 
 <style>

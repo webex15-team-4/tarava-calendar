@@ -196,20 +196,20 @@
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
       </div>
     </div>
-    <!-- <ul v-if="commentAreaId !== null"> -->
-    <li
-      class="show_return"
-      v-for="(comment, commentIndex) in comments"
-      :key="commentIndex"
-      style="list-style-type: none"
-    >
-      <label class="commentItem">
-        <!-- <input v-model="comment.done" /> -->
-        <p>{{ comment }}</p>
-        <!-- <button v-on:click="deleteBtn(commentIndex)">削除</button> -->
-      </label>
-    </li>
-    <!-- </ul> -->
+    <ul v-if="commentAreaId !== null">
+      <li
+        class="show_return"
+        v-for="(item, commentIndex) in containers[commentAreaId].items"
+        :key="commentIndex"
+        style="list-style-type: none"
+      >
+        <label class="commentItem">
+          <input v-model="comment.done" />
+          <p :class="{ done: item.done }">{{ item.text }}</p>
+          <button v-on:click="deleteBtn(commentIndex)">削除</button>
+        </label>
+      </li>
+    </ul>
   </div>
   <div>
     <!-- <ul class="ul"> -->
@@ -255,7 +255,6 @@ export default {
         { id: 1, text: "２", items: [] },
         { id: 2, text: "３", items: [] },
       ],
-      comments: [],
       commentAreaId: null,
       // ほんまっちとあわせるところ（予定作成機能）
       scheduleKinou: false,
@@ -681,17 +680,7 @@ export default {
     })
     console.log(this.items)
     console.log(typeof this.items)
-
-    const q1 = query(collection(db, "Comment"))
-    const querySnapshot1 = await getDocs(q1)
-    console.log(querySnapshot1)
-    querySnapshot1.forEach((doc) => {
-      this.comments.push(doc.data().text)
-    })
-    console.log(this.items)
-    console.log(typeof this.items)
   },
-
   methods: {
     lastMonth: function () {
       if (this.month == 1) {
@@ -804,7 +793,7 @@ export default {
     async comment() {
       if (this.inputComment !== "") {
         this.containers.push({ text: this.inputComment })
-        this.comments.push(this.inputComment)
+        this.items.push({ text: this.inputComment })
         console.log(this.inputComment)
         console.log("コメントできたよ")
         let memo = {
@@ -823,7 +812,7 @@ export default {
       }
     },
     deleteBtn(commentIndex) {
-      this.comments.splice(commentIndex, 1)
+      this.items.splice(commentIndex, 1)
     },
   },
   mounted() {
@@ -943,9 +932,9 @@ td {
 .calendar3 {
   cursor: pointer;
 }
-/* .calender3:hover {
+.calender3:hover {
   background-color: green;
-} */
+}
 .show_return {
   white-space: pre-wrap;
   word-wrap: break-word;

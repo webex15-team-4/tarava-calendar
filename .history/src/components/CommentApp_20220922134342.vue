@@ -66,6 +66,7 @@ export default {
           {
             // this.inputComment = ""
           }
+      // this.inputComment = ""
     },
   },
 }

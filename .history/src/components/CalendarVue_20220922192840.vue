@@ -34,7 +34,7 @@
   </div>
   <!-- ほんまっちとあわせるところ（予定作成機能） -->
   <div class="schedule">
-    <button v-on:click="scheduleRan" class="scheduleRan">＋予定</button>
+    <button v-on:click="scheduleRan">＋予定</button>
   </div>
   <div v-if="scheduleKinou" class="scheduleKinou">
     <br />
@@ -178,7 +178,7 @@
   <br />
   <br />
   <!-- 36～69行目 ほんまっちとあわせるところ（コメント機能） -->
-  <div v-if="commentKinou" class="calender3">
+  <div v-if="commentKinou" class="calender2">
     <div class="commentRan">
       <br />
       <textarea
@@ -196,34 +196,33 @@
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
       </div>
     </div>
-    <!-- <ul v-if="commentAreaId !== null"> -->
-    <li
-      class="show_return"
-      v-for="(comment, commentIndex) in comments"
-      :key="commentIndex"
-      style="list-style-type: none"
-    >
-      <label class="commentItem">
-        <!-- <input v-model="comment.done" /> -->
-        <p>{{ comment }}</p>
-        <!-- <button v-on:click="deleteBtn(commentIndex)">削除</button> -->
-      </label>
-    </li>
-    <!-- </ul> -->
+    <ul v-if="commentAreaId !== null">
+      <li
+        class="show_return"
+        v-for="(item, commentIndex) in containers[commentAreaId].items"
+        :key="commentIndex"
+        style="list-style-type: none"
+      >
+        <label class="commentItem">
+          <input v-model="comment.done" />
+          <p :class="{ done: item.done }">{{ item.text }}</p>
+          <button v-on:click="deleteBtn(commentIndex)">削除</button>
+        </label>
+      </li>
+    </ul>
   </div>
   <div>
     <!-- <ul class="ul"> -->
     <li v-for="item in items" :key="item" class="li">
-      <div v-bind:style="item.color" class="itemColor">
-        <!-- <div class="itemText"> -->
+      <h3 v-bind:style="item.color" class="itemColor">
+        <!-- <h1 class="itemText"> -->
         {{ item.text }}
-        &nbsp;
-        <!-- </div> -->
+        <!-- </h1> -->
         <!-- {{ item.date }}  -->
         {{ item.time }}:{{ item.time2 }} ~
         <!-- {{ item.date2 }} -->
         {{ item.lastTime }}:{{ item.lastTime2 }}
-      </div>
+      </h3>
       <!-- 一旦コメントアウトしとく削除機能 -->
       <!-- <label class="commentItem">
           <input v-model="comments" />
@@ -255,7 +254,6 @@ export default {
         { id: 1, text: "２", items: [] },
         { id: 2, text: "３", items: [] },
       ],
-      comments: [],
       commentAreaId: null,
       // ほんまっちとあわせるところ（予定作成機能）
       scheduleKinou: false,
@@ -681,17 +679,7 @@ export default {
     })
     console.log(this.items)
     console.log(typeof this.items)
-
-    const q1 = query(collection(db, "Comment"))
-    const querySnapshot1 = await getDocs(q1)
-    console.log(querySnapshot1)
-    querySnapshot1.forEach((doc) => {
-      this.comments.push(doc.data().text)
-    })
-    console.log(this.items)
-    console.log(typeof this.items)
   },
-
   methods: {
     lastMonth: function () {
       if (this.month == 1) {
@@ -804,7 +792,7 @@ export default {
     async comment() {
       if (this.inputComment !== "") {
         this.containers.push({ text: this.inputComment })
-        this.comments.push(this.inputComment)
+        this.items.push({ text: this.inputComment })
         console.log(this.inputComment)
         console.log("コメントできたよ")
         let memo = {
@@ -823,7 +811,7 @@ export default {
       }
     },
     deleteBtn(commentIndex) {
-      this.comments.splice(commentIndex, 1)
+      this.items.splice(commentIndex, 1)
     },
   },
   mounted() {
@@ -873,13 +861,6 @@ td {
   display: flex;
   justify-content: flex-end;
 }
-.scheduleRan {
-  background-color: white;
-  border: 1px solid;
-}
-.scheduleRan:hover {
-  background-color: pink;
-}
 .startend {
 }
 .scheduleKinou {
@@ -926,8 +907,6 @@ td {
 .itemColor {
   height: 30px;
   line-height: 30px;
-  font-weight: 50px;
-  font-size: 18px;
 }
 
 .scheduleButton1 {
@@ -940,12 +919,6 @@ td {
   text-align: center;
 }
 /* 242～275行目 ほんまっちとあわせるところ（コメント機能） */
-.calendar3 {
-  cursor: pointer;
-}
-/* .calender3:hover {
-  background-color: green;
-} */
 .show_return {
   white-space: pre-wrap;
   word-wrap: break-word;

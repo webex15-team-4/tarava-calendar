@@ -34,7 +34,7 @@
   </div>
   <!-- ほんまっちとあわせるところ（予定作成機能） -->
   <div class="schedule">
-    <button v-on:click="scheduleRan" class="scheduleRan">＋予定</button>
+    <button v-on:click="scheduleRan">＋予定</button>
   </div>
   <div v-if="scheduleKinou" class="scheduleKinou">
     <br />
@@ -110,7 +110,7 @@
       </select>
       <!-- 112～169行目 さえちゃんの色機能のとこ -->
       <!-- ボタンを押したら色機能を表示 -->
-      <div style="align-content: center"></div>
+
       <div class="showColor" v-bind:style="selectedColor"></div>
       <button v-on:click="irokinou">背景色を変更</button>
       <!-- 予定の背景の色を変化...クリックした色を表示させる
@@ -175,10 +175,24 @@
       <button v-on:click="deletes" class="scheduleButton3">削除</button>
     </div>
   </div>
-  <br />
-  <br />
+  <div>
+    <ul>
+      <li v-for="item in items" :key="item">
+        <div style="item.color">
+          {{ item.text }} {{ item.date }} {{ item.time }}:{{ item.time2 }} ~
+          {{ item.date2 }} {{ item.lastTime }}:{{ item.lastTime2 }}
+        </div>
+        <!-- 一旦コメントアウトしとく削除機能 -->
+        <!-- <label class="commentItem">
+          <input v-model="comments" />
+          <p :class="{ index: item.index }">{{ item.text }}</p>
+          <button v-on:click="deleteBtn(commentIndex)">削除</button>
+        </label> -->
+      </li>
+    </ul>
+  </div>
   <!-- 36～69行目 ほんまっちとあわせるところ（コメント機能） -->
-  <div v-if="commentKinou" class="calender3">
+  <div v-if="commentKinou" class="calender2">
     <div class="commentRan">
       <br />
       <textarea
@@ -196,42 +210,21 @@
         <!-- <button v-on:click="allDeletBtn(commentAreaId)">すべて消す</button> -->
       </div>
     </div>
-    <!-- <ul v-if="commentAreaId !== null"> -->
-    <li
-      class="show_return"
-      v-for="(comment, commentIndex) in comments"
-      :key="commentIndex"
-      style="list-style-type: none"
-    >
-      <label class="commentItem">
-        <!-- <input v-model="comment.done" /> -->
-        <p>{{ comment }}</p>
-        <!-- <button v-on:click="deleteBtn(commentIndex)">削除</button> -->
-      </label>
-    </li>
-    <!-- </ul> -->
-  </div>
-  <div>
-    <!-- <ul class="ul"> -->
-    <li v-for="item in items" :key="item" class="li">
-      <div v-bind:style="item.color" class="itemColor">
-        <!-- <div class="itemText"> -->
-        {{ item.text }}
-        &nbsp;
-        <!-- </div> -->
-        <!-- {{ item.date }}  -->
-        {{ item.time }}:{{ item.time2 }} ~
-        <!-- {{ item.date2 }} -->
-        {{ item.lastTime }}:{{ item.lastTime2 }}
-      </div>
-      <!-- 一旦コメントアウトしとく削除機能 -->
-      <!-- <label class="commentItem">
-          <input v-model="comments" />
-          <p :class="{ index: item.index }">{{ item.text }}</p>
+
+    <ul v-if="commentAreaId !== null">
+      <li
+        class="show_return"
+        v-for="(item, commentIndex) in containers[commentAreaId].items"
+        :key="commentIndex"
+        style="list-style-type: none"
+      >
+        <label class="commentItem">
+          <input v-model="comment.done" />
+          <p :class="{ done: item.done }">{{ item.text }}</p>
           <button v-on:click="deleteBtn(commentIndex)">削除</button>
-        </label> -->
-    </li>
-    <!-- </ul> -->
+        </label>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -239,6 +232,7 @@
 // 73～74行目 ほんまっちとあわせるところ(コメント機能と予定作成機能)
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { db } from "../firebase"
+
 export default {
   data() {
     return {
@@ -255,7 +249,6 @@ export default {
         { id: 1, text: "２", items: [] },
         { id: 2, text: "３", items: [] },
       ],
-      comments: [],
       commentAreaId: null,
       // ほんまっちとあわせるところ（予定作成機能）
       scheduleKinou: false,
@@ -347,7 +340,7 @@ export default {
       ],
       // 345～528行目 さえちゃんの色機能のとこ
       isVisible: true,
-      colorArea: false,
+      colorArea: true,
       bgColor: {
         backgroundColor: "white",
         backgroundImage: "",
@@ -665,6 +658,7 @@ export default {
   // 119～128行目 ほんまっちとあわせるところ（コメント機能と予定作成機能）
   async created() {
     const q = query(collection(db, "Schedule"))
+
     const querySnapshot = await getDocs(q)
     console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
@@ -681,17 +675,7 @@ export default {
     })
     console.log(this.items)
     console.log(typeof this.items)
-
-    const q1 = query(collection(db, "Comment"))
-    const querySnapshot1 = await getDocs(q1)
-    console.log(querySnapshot1)
-    querySnapshot1.forEach((doc) => {
-      this.comments.push(doc.data().text)
-    })
-    console.log(this.items)
-    console.log(typeof this.items)
   },
-
   methods: {
     lastMonth: function () {
       if (this.month == 1) {
@@ -709,6 +693,7 @@ export default {
         this.month++
       }
     },
+
     isToday: function (day) {
       let date = this.year + "-" + this.month + "-" + day
       if (this.today == date) {
@@ -747,6 +732,7 @@ export default {
     },
     async commentpush() {
       if (this.inputComment !== "") {
+        const colord = { ...this.selectedColor }
         const item = {
           text: this.inputComment,
           date: this.selectDate,
@@ -755,13 +741,14 @@ export default {
           date2: this.selectDate2,
           lastTime: this.selectedTimeLast,
           lastTime2: this.selectedTimeLast2,
-          color: this.selectedColor,
+          color: colord,
         }
         this.items.push(item)
         console.log(this.inputComment)
         console.log(this.items)
         console.log("追加できてるよ")
         await addDoc(collection(db, "Schedule"), item)
+
         this.inputComment = ""
         this.inputMemo = ""
       }
@@ -784,6 +771,7 @@ export default {
     //   this.items.splice(commentIndex, 1)
     //   console.log("削除できたよ")
     // },
+
     // 153～198行目 ほんまっちとあわせるところ（コメント機能）
     commentRan: function () {
       if (this.commentKinou) {
@@ -794,23 +782,27 @@ export default {
         console.log("コメント欄が出現したよ")
       }
     },
+
     keyDownEnter() {
       this.inputComment = `${this.inputComment}￥n`
       console.log("ボタンが押された！")
     },
+
     keyDownEnterShift() {
       console.log("shift,enter")
     },
     async comment() {
       if (this.inputComment !== "") {
         this.containers.push({ text: this.inputComment })
-        this.comments.push(this.inputComment)
+        this.items.push({ text: this.inputComment })
         console.log(this.inputComment)
         console.log("コメントできたよ")
+
         let memo = {
           text: this.inputComment,
         }
         await addDoc(collection(db, "Comment"), memo)
+
         this.inputMemo = ""
       } else {
         alert("コメントを入力してください")
@@ -823,9 +815,10 @@ export default {
       }
     },
     deleteBtn(commentIndex) {
-      this.comments.splice(commentIndex, 1)
+      this.items.splice(commentIndex, 1)
     },
   },
+
   mounted() {
     let date = new Date()
     this.year = date.getFullYear()
@@ -873,13 +866,6 @@ td {
   display: flex;
   justify-content: flex-end;
 }
-.scheduleRan {
-  background-color: white;
-  border: 1px solid;
-}
-.scheduleRan:hover {
-  background-color: pink;
-}
 .startend {
 }
 .scheduleKinou {
@@ -920,16 +906,6 @@ td {
   width: 300px;
   radius: 50px;
 }
-.li {
-  list-style: none;
-}
-.itemColor {
-  height: 30px;
-  line-height: 30px;
-  font-weight: 50px;
-  font-size: 18px;
-}
-
 .scheduleButton1 {
   margin-right: 20px;
 }
@@ -940,12 +916,6 @@ td {
   text-align: center;
 }
 /* 242～275行目 ほんまっちとあわせるところ（コメント機能） */
-.calendar3 {
-  cursor: pointer;
-}
-/* .calender3:hover {
-  background-color: green;
-} */
 .show_return {
   white-space: pre-wrap;
   word-wrap: break-word;

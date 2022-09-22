@@ -206,7 +206,7 @@
       <label class="commentItem">
         <!-- <input v-model="comment.done" /> -->
         <p>{{ comment }}</p>
-        <!-- <button v-on:click="deleteBtn(commentIndex)">削除</button> -->
+        <button v-on:click="deleteBtn(commentIndex)">削除</button>
       </label>
     </li>
     <!-- </ul> -->
@@ -686,12 +686,14 @@ export default {
     const querySnapshot1 = await getDocs(q1)
     console.log(querySnapshot1)
     querySnapshot1.forEach((doc) => {
-      this.comments.push(doc.data().text)
+      this.comments.push(
+        doc.data().text
+      )
     })
     console.log(this.items)
     console.log(typeof this.items)
   },
-
+  },
   methods: {
     lastMonth: function () {
       if (this.month == 1) {

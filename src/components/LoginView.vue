@@ -5,10 +5,10 @@
       <label for="drawer-check" class="drawer-open"><span></span></label>
       <nav class="drawer-content">
         <ul class="drawer-list">
-          <li class="drawer-item">
+          <li class="drawer-item" style="list-style: none">
             <nav v-on:click="button">
-              <p v-if="loginAcount">ログイン</p>
-              <p v-else>ログアウト</p>
+              <p v-if="loginAcount" class="thick">ログイン</p>
+              <p v-else class="thick">ログアウト</p>
             </nav>
           </li>
         </ul>
@@ -25,15 +25,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth"
-
 export default {
   name: "LoginView",
   data() {
     return {
       loginAcount: true,
+      userEmail: "",
     }
   },
-
   // created() {
   //   const auth = getAuth()
   //   onAuthStateChanged(auth, async (user) => {
@@ -111,7 +110,8 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 100; /* 重なり順を一番上に */
+  z-index: 100;
+  /* 重なり順を一番上に */
   cursor: pointer;
 }
 .drawer-open span,
@@ -139,7 +139,6 @@ drawer-open span:before {
   bottom: 0;
   transform: rotate(45deg);
 }
-
 #drawer-check:checked ~ .drawer-open span::after {
   top: 0;
   transform: rotate(-45deg);
@@ -156,5 +155,9 @@ drawer-open span:before {
 }
 #drawer-check:checked ~ .drawer-content {
   left: 0;
+}
+.thick {
+  font-weight: bold;
+  font-size: large;
 }
 </style>
